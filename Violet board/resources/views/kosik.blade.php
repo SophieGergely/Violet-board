@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Košík</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/kosik.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
 
 
@@ -24,7 +24,7 @@
                 @foreach ($cart as $id => $item)
                     <div class="cart-item d-flex align-items-center">
                         <img src="{{ asset('Pictures/' . $item['image']) }}" class="me-2" alt="product" width="50">
-                        <div class="flex-grow-1">{{ $item['name'] }}</div>
+                        <div class="grow">{{ $item['name'] }}</div>
 
                         <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline mx-1">
                             @csrf

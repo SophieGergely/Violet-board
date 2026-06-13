@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ďakujeme za Vás nákup</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/dakujeme.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
 
 

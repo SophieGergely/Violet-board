@@ -1,0 +1,773 @@
+/* ============================================================
+   VIOLET BOARD – GLOBAL DESIGN SYSTEM
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+
+    /* Colors — Midnight Violet */
+    --color-bg: #EDE8FA;
+    --color-surface: #FFFFFF;
+
+    --color-primary: #7C3AED;
+    --color-primary-dark: #4A1D96;
+    --color-primary-light: #DDD1F7;
+
+    --color-gold: #C9A84C;
+    --color-gold-light: #FBF3D5;
+
+    --color-text: #1E0A3C;
+    --color-text-muted: #6B5F80;
+
+    --color-border: #C4B0EC;
+
+    --color-danger: #D64545;
+    --color-success: #2E9D63;
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 2.75rem;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* Radius */
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-full: 999px;
+
+    /* Shadows */
+    --shadow-sm: 0 4px 12px rgba(124,58,237,.08);
+    --shadow-md: 0 8px 24px rgba(124,58,237,.12);
+    --shadow-lg: 0 16px 40px rgba(124,58,237,.16);
+
+    /* Layout */
+    --navbar-height: 72px;
+    --footer-height: 60px;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: var(--font-body);
+    color: var(--color-text);
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(124,58,237,.05),
+            transparent 30%
+        ),
+        var(--color-bg);
+
+    line-height: 1.6;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    padding-top: var(--navbar-height);
+    padding-bottom: var(--footer-height);
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar {
+
+    height: var(--navbar-height);
+
+    background: rgba(255,255,255,.92) !important;
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid var(--color-border);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 0 var(--space-5) !important;
+
+    display: flex;
+    align-items: center;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 200;
+}
+
+.navbar-brand {
+
+    font-family: var(--font-display);
+
+    font-size: var(--text-2xl);
+
+    font-weight: 600;
+
+    color: var(--color-primary) !important;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.logo {
+
+    width: 80px;
+    height: 80px;
+
+    object-fit: cover;
+
+    border-radius: var(--radius-md);
+
+    border: none;
+
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.search-bar {
+
+    width: 100%;
+    max-width: 260px;
+
+    height: 42px;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-full);
+
+    background: white;
+
+    padding: 0 16px;
+
+    font-size: var(--text-sm);
+}
+
+.search-bar:focus {
+
+    outline: none;
+
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn-primary,
+.btn-dark {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-primary-dark)
+        );
+
+    border: none;
+
+    color: white;
+
+    border-radius: var(--radius-full);
+
+    font-weight: 600;
+
+    transition: .2s ease;
+}
+
+.btn-primary:hover,
+.btn-dark:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-md);
+
+    color: white;
+}
+
+.btn-light {
+
+    background: var(--color-primary-light);
+
+    color: var(--color-primary);
+
+    border: none;
+
+    border-radius: var(--radius-full);
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar {
+
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 16px;
+
+    overflow-y: auto;
+}
+
+.category-button {
+
+    display: block;
+
+    width: 100%;
+
+    background: var(--color-primary-light);
+
+    color: var(--color-primary);
+
+    border: none;
+
+    border-radius: var(--radius-md);
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.category-button:hover {
+
+    background: var(--color-primary);
+
+    color: white;
+}
+
+/* ============================================================
+   PRODUCT CARD
+   ============================================================ */
+
+.product-card {
+
+    background: white;
+
+    border-radius: var(--radius-lg);
+
+    border: 1px solid rgba(124,58,237,.08);
+
+    box-shadow: var(--shadow-sm);
+
+    overflow: hidden;
+
+    transition: .25s ease;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+
+    height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 12px;
+}
+
+.product-image img {
+
+    max-height: 100%;
+
+    object-fit: contain;
+}
+
+.product-name {
+
+    color: var(--color-text);
+
+    font-weight: 600;
+
+    background: transparent;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    padding: 0 8px;
+}
+
+.product-details {
+
+    background: var(--color-primary-light);
+
+    border-radius: var(--radius-md);
+
+    padding: 14px;
+
+    margin: 12px;
+
+    text-align: center;
+}
+
+/* ============================================================
+   HEART
+   ============================================================ */
+
+.heart-icon {
+
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: white;
+
+    color: var(--color-primary);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: .2s ease;
+}
+
+.heart-icon:hover {
+
+    background: var(--color-primary);
+
+    color: white;
+}
+
+/* ============================================================
+   SHIPPING / PAYMENT
+   ============================================================ */
+
+.shipping-container,
+.payment-methods {
+
+    background: white;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 20px;
+}
+
+/* ============================================================
+   PRICE / SUMMARY
+   ============================================================ */
+
+.price-container,
+.summary {
+
+    background: white;
+
+    border-radius: var(--radius-lg);
+
+    border: 1px solid var(--color-border);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 20px;
+}
+
+/* ============================================================
+   CART
+   ============================================================ */
+
+.cart-item {
+
+    background: white;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 16px;
+
+    margin-bottom: 12px;
+}
+
+.quantity {
+
+    background: var(--color-primary);
+
+    color: white;
+
+    border-radius: var(--radius-full);
+
+    padding: 6px 12px;
+}
+
+/* ============================================================
+   PRODUCT PAGE
+   ============================================================ */
+
+.product-image-wrapper {
+
+    background: var(--color-primary-light);
+
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+}
+
+.product-description {
+
+    background: white;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: 24px;
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+input,
+textarea,
+select {
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-md);
+
+    padding: 10px 14px;
+
+    transition: .2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+
+    outline: none;
+
+    border-color: var(--color-primary);
+
+    box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    background: rgba(255,255,255,.95) !important;
+
+    backdrop-filter: blur(12px);
+
+    border-top: 1px solid var(--color-border);
+
+    box-shadow: 0 -2px 12px rgba(124,58,237,.05);
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 10px;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+.text-danger {
+    color: var(--color-danger);
+}
+
+.text-success {
+    color: var(--color-success);
+}
+
+.text-decoration-line-through {
+    color: var(--color-text-muted);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .search-bar {
+        max-width: 180px;
+    }
+
+    .product-image {
+        height: 140px;
+    }
+}
+
+/* ============================================================
+   CAROUSEL HOME PAGE
+   ============================================================ */
+
+.carousel-wrapper {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.arrow-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 12px;
+}
+
+.carousel-header {
+
+    text-align: center;
+
+    font-family: var(--font-display);
+
+    font-size: var(--text-xl);
+
+    font-weight: 600;
+
+    color: var(--color-primary-dark);
+
+    margin-bottom: 20px;
+
+    letter-spacing: 0.02em;
+}
+
+.carousel-content {
+
+    display: flex;
+
+    transition: transform .35s ease;
+
+    will-change: transform;
+}
+
+.carousel-content .product-card {
+
+    background: white;
+
+    text-align: center;
+
+    border-radius: var(--radius-lg);
+
+    width: 220px !important;
+
+    height: 260px !important;
+
+    margin: 0 20px 0 0;
+
+    flex-shrink: 0;
+
+    padding: 10px;
+
+    flex: 0 0 220px !important;
+
+    display: block !important;
+
+    box-shadow: var(--shadow-md);
+}
+
+.carousel-content .product-image {
+
+    width: 180px;
+
+    height: 180px;
+}
+
+.carousel-view {
+
+    overflow: hidden;
+
+    /* max-width a JS állítja be dinamikusan view.offsetWidth alapján */
+}
+
+.arrow-section {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: var(--color-primary);
+
+    border: none;
+
+    box-shadow: var(--shadow-sm);
+
+    color: white;
+
+    transition: .2s ease;
+}
+
+.arrow-section:hover {
+
+    background: var(--color-primary-dark);
+
+    box-shadow: var(--shadow-md);
+
+    color: white;
+}
+
+/* ── Navbar home gomb ─────────────────────────────────────── */
+.navbar-home-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary);
+    color: #fff;
+    flex-shrink: 0;
+    transition: background .2s ease;
+    text-decoration: none;
+}
+
+.navbar-home-btn:hover {
+    background: var(--color-primary-dark);
+    color: #fff;
+}
+
+/* ── Carousel section panel ───────────────────────────────── */
+.carousel-section {
+
+    background: var(--color-primary-light);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-md);
+
+    padding: 28px 24px 24px;
+
+    margin-bottom: 20px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    min-width: 0;
+
+    width: 100%;
+}
+
+/* ── Home page section col fix ────────────────────────────── */
+.row.flex-nowrap > section.col {
+    min-width: 0;
+    overflow: hidden;
+}

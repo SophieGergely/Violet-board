@@ -1,42 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const carousels = document.querySelectorAll('.carousel-section');
+    const CARD = 220;
+    const GAP  = 20;
 
-    carousels.forEach((carouselSection) => {
-        const wrapper = carouselSection.querySelector('.carousel-content');
-        const view = carouselSection.querySelector('.carousel-view');
-        const cards = wrapper.querySelectorAll('.product-card');
-        const leftArrow = carouselSection.querySelector('.arrow.left');
+    document.querySelectorAll('.carousel-section').forEach((carouselSection) => {
+        const wrapper    = carouselSection.querySelector('.carousel-content');
+        const view       = carouselSection.querySelector('.carousel-view');
+        const cards      = wrapper.querySelectorAll('.product-card');
+        const leftArrow  = carouselSection.querySelector('.arrow.left');
         const rightArrow = carouselSection.querySelector('.arrow.right');
 
-        const cardWidth = 170;
         let currentIndex = 0;
-        let visibleCount = 3;
 
-        function updateVisibleCount() {
-            const viewWidth = view.offsetWidth;
-            visibleCount = Math.floor(viewWidth / cardWidth);
+        function calcVisible(availableWidth) {
+            return Math.max(1, Math.floor((availableWidth + GAP) / (CARD + GAP)));
         }
 
         function updateCarousel() {
-            updateVisibleCount();
-            const maxIndex = Math.max(0, cards.length - visibleCount);
-            currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-            const offset = -currentIndex * cardWidth;
-            wrapper.style.transform = `translateX(${offset}px)`;
+            // Töröljük a fix width-et
+            view.style.width = '';
+
+            // A section belső szélességéből számolunk (padding nélkül)
+            const sectionStyle  = window.getComputedStyle(carouselSection);
+            const sectionWidth  = carouselSection.clientWidth
+                                - parseFloat(sectionStyle.paddingLeft)
+                                - parseFloat(sectionStyle.paddingRight);
+
+            const visible = calcVisible(sectionWidth);
+            const viewW   = visible * (CARD + GAP) - GAP;
+
+            // Csak akkor állítunk fix szélességet ha kisebb mint a section
+            view.style.width = Math.min(viewW, sectionWidth) + 'px';
+
+            const maxIndex = Math.max(0, cards.length - visible);
+            currentIndex   = Math.max(0, Math.min(currentIndex, maxIndex));
+            wrapper.style.transform = `translateX(${-currentIndex * (CARD + GAP)}px)`;
         }
 
-        window.addEventListener('resize', updateCarousel);
+        leftArrow.addEventListener('click',  () => { currentIndex--; updateCarousel(); });
+        rightArrow.addEventListener('click', () => { currentIndex++; updateCarousel(); });
+        window.addEventListener('resize',    () => { currentIndex = 0; updateCarousel(); });
 
-        leftArrow.addEventListener('click', () => {
-            currentIndex--;
-            updateCarousel();
-        });
-
-        rightArrow.addEventListener('click', () => {
-            currentIndex++;
-            updateCarousel();
-        });
-
-        updateCarousel();
+        requestAnimationFrame(updateCarousel);
     });
 });

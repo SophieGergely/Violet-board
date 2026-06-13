@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Platba</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('css/platba.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
 
 
