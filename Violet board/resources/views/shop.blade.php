@@ -58,7 +58,7 @@
                     class="btn btn-outline-secondary dropdown-toggle">
                     Zoradiť
                 </button>
-                <div id="sortMenu" class="z-10 hidden bg-white rounded-lg shadow-lg w-44">
+                <div id="sortMenu" class="z-10 hidden bg-white rounded-lg shadow-lg w-44" style="z-index:300">
                     <ul class="py-2 text-sm">
                         <li><a href="{{ request()->fullUrlWithQuery(['sort' => 'asc']) }}" class="block px-4 py-2 hover:bg-purple-50">A–Z</a></li>
                         <li><a href="{{ request()->fullUrlWithQuery(['sort' => 'desc']) }}" class="block px-4 py-2 hover:bg-purple-50">Z–A</a></li>
@@ -73,7 +73,7 @@
                     class="btn btn-outline-secondary dropdown-toggle">
                     Filter
                 </button>
-                <div id="filterMenu" class="z-10 hidden bg-white rounded-lg shadow-lg p-4" style="min-width:260px">
+                <div id="filterMenu" class="z-10 hidden bg-white rounded-lg shadow-lg p-4" style="min-width:260px;z-index:300">
                     <form method="GET" action="{{ url()->current() }}">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Cena od:</label>

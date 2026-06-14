@@ -295,7 +295,9 @@ a:hover {
 
 .sidebar.collapsed {
 
-    width: 0;
+    width: 0 !important;
+
+    min-width: 0 !important;
 
     padding-left: 0;
 
@@ -328,9 +330,11 @@ a:hover {
 
     font-family: var(--font-body);
 
-    font-size: 0.875rem;
+    font-size: 0.825rem;
 
     font-weight: 500;
+
+    white-space: nowrap;
 
     text-align: left;
 }
@@ -339,7 +343,7 @@ a:hover {
 
     background: #EDE9F8;
 
-    color: #000000;
+    color: var(--color-primary);
 }
 
 /* ============================================================
@@ -854,13 +858,13 @@ select:focus {
 .row.flex-nowrap > section.col {
     min-width: 0;
     overflow: hidden;
-    margin-left: 160px !important;
+    margin-left: var(--sidebar-w, 160px) !important;
     padding-left: 16px;
 }
 
 /* Main content area – sits next to fixed sidebar */
 .main-content {
-    margin-left: 160px;
+    margin-left: var(--sidebar-w, 160px);
     padding: 16px;
     min-width: 0;
     overflow: hidden;
@@ -931,6 +935,8 @@ select:focus {
     border-radius: var(--radius-md);
 
     box-shadow: var(--shadow-md);
+
+    z-index: 200 !important;
 }
 
 .dropdown-item:hover {
@@ -961,7 +967,7 @@ select:focus {
 
     top: calc(var(--navbar-height) + 12px);
 
-    left: 160px;
+    left: var(--sidebar-w, 160px);
 
     z-index: 101;
 
@@ -999,7 +1005,7 @@ select:focus {
 
 .sidebar-toggle.collapsed {
 
-    left: 0;
+    left: 0 !important;
 }
 
 /* ── Pagination ───────────────────────────────────────────── */

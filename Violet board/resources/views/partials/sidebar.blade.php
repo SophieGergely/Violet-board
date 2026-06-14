@@ -10,3 +10,18 @@
         <button onclick="location.href='{{ url('/shop/pamat') }}'" class="category-button">Pamäťové hry</button>
     </div>
 </aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+
+        // Measure natural width and lock it as explicit px value
+        // so CSS transition from px -> 0 works correctly
+        const w = sidebar.scrollWidth;
+        sidebar.style.width = w + 'px';
+        document.documentElement.style.setProperty('--sidebar-w', w + 'px');
+
+        const toggle = document.getElementById('sidebarToggle');
+        if (toggle) toggle.style.left = w + 'px';
+    });
+</script>
