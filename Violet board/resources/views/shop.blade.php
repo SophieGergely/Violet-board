@@ -20,9 +20,7 @@
             @include('partials.sidebar')
 
             <section class="col">
-                <div style="text-align: center; align-items: center; justify-content: center;">
-                    <div style="font-size: xx-large;">{{ $categoryTitle ?? 'Shop' }}</div>
-                </div>
+                <div class="category-title">{{ $categoryTitle ?? 'Shop' }}</div>
 
                 <div class="d-flex justify-content-between align-items-center mb-3 px-3">
 

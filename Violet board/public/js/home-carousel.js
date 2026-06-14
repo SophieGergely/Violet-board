@@ -16,10 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function updateCarousel() {
-            // Töröljük a fix width-et
             view.style.width = '';
 
-            // A section belső szélességéből számolunk (padding nélkül)
             const sectionStyle  = window.getComputedStyle(carouselSection);
             const sectionWidth  = carouselSection.clientWidth
                                 - parseFloat(sectionStyle.paddingLeft)
@@ -28,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const visible = calcVisible(sectionWidth);
             const viewW   = visible * (CARD + GAP) - GAP;
 
-            // Csak akkor állítunk fix szélességet ha kisebb mint a section
             view.style.width = Math.min(viewW, sectionWidth) + 'px';
 
             const maxIndex = Math.max(0, cards.length - visible);
