@@ -17,46 +17,42 @@
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </a>
-            <span class="fw-semibold fs-5" style="color:var(--color-primary)">Prihlásenie zákazníka</span>
+            <span class="fw-semibold fs-5" style="color:#ffffff">Prihlásenie zákazníka</span>
             <div style="width:38px"></div>
         </div>
     </nav>
 
-    <div class="container form-container">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
+    {{-- Centered vertically between navbar and footer --}}
+    <div class="container" style="min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); display: flex; align-items: center; justify-content: center; padding: 32px 16px;">
+        <div class="col-md-5">
+            <div class="bg-white rounded-xl shadow-lg p-5" style="border:1px solid var(--color-border);">
+                <h2 class="text-center fw-semibold mb-4" style="color:var(--color-primary);font-size:1.75rem">Vitajte späť!</h2>
 
-                {{-- Flowbite card --}}
-                <div class="bg-white rounded-xl shadow-lg p-5" style="border:1px solid var(--color-border);">
-                    <h4 class="text-center fw-semibold mb-4" style="color:var(--color-primary)">Vitajte späť</h4>
+                @if ($errors->any())
+                    <div class="alert alert-danger rounded-lg mb-3">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger rounded-lg mb-3">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-medium">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="vas@email.com" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-medium">Heslo</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Prihlásiť sa</button>
+                </form>
 
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="email" class="form-label fw-medium">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="vas@email.com" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="password" class="form-label fw-medium">Heslo</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="••••••••" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Prihlásiť sa</button>
-                    </form>
-
-                    <p class="text-center mt-3 text-muted small">
-                        Ešte nemáš účet?
-                        <a href="/registracia" style="color:var(--color-primary)">Zaregistrovať sa</a>
-                    </p>
-                </div>
-
+                <p class="text-center mt-3 text-muted small">
+                    Ešte nemáte účet?
+                    <a href="/registracia" style="color:var(--color-primary)">Zaregistrovať sa</a>
+                </p>
             </div>
         </div>
     </div>

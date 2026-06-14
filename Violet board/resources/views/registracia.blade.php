@@ -17,53 +17,51 @@
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </a>
-            <span class="fw-semibold fs-5" style="color:var(--color-primary)">Registrácia zákazníka</span>
+            <span class="fw-semibold fs-5" style="color:#ffffff">Registrácia zákazníka</span>
             <div style="width:38px"></div>
         </div>
     </nav>
 
-    <div class="container form-container">
-        <div class="row justify-content-center">
-            <div class="col-md-5" style="margin-bottom:80px">
-                <div class="bg-white rounded-xl shadow-lg p-5" style="border:1px solid var(--color-border);">
-                    <h4 class="text-center fw-semibold mb-4" style="color:var(--color-primary)">Vytvorte si účet</h4>
+    <div class="container" style="min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); display: flex; align-items: center; justify-content: center; padding: 32px 16px;">
+        <div class="col-md-5">
+            <div class="bg-white rounded-xl shadow-lg p-5" style="border:1px solid var(--color-border);">
+                <h2 class="text-center fw-semibold mb-4" style="color:var(--color-primary);font-size:1.75rem">Vytvorte si účet</h2>
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger rounded-lg mb-3">
-                            {{ $errors->first() }}
-                        </div>
-                    @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger rounded-lg mb-3">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
 
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="form-label fw-medium">Meno</label>
-                            <input type="text" class="form-control" name="name" placeholder="Zadajte vaše meno" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-medium">Priezvisko</label>
-                            <input type="text" class="form-control" name="surname" placeholder="Zadajte vaše priezvisko" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-medium">Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="vas@email.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-medium">Heslo <span class="text-muted small">(min. 6 znakov)</span></label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label fw-medium">Heslo ešte raz</label>
-                            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="••••••••" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Zaregistrovať sa</button>
-                    </form>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Meno</label>
+                        <input type="text" class="form-control" name="name" placeholder="Zadajte vaše meno" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Priezvisko</label>
+                        <input type="text" class="form-control" name="surname" placeholder="Zadajte vaše priezvisko" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="vas@email.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-medium">Heslo <span class="text-muted small">(min. 6 znakov)</span></label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-medium">Heslo ešte raz</label>
+                        <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Zaregistrovať sa</button>
+                </form>
 
-                    <p class="text-center mt-3 text-muted small">
-                        Už máš účet?
-                        <a href="/prihlasenie" style="color:var(--color-primary)">Prihlásiť sa</a>
-                    </p>
-                </div>
+                <p class="text-center mt-3 text-muted small">
+                    Už máte účet?
+                    <a href="/prihlasenie" style="color:var(--color-primary)">Prihlásiť sa</a>
+                </p>
             </div>
         </div>
     </div>
