@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import subprocess
-import sys
 import os
 import shutil
 import time
@@ -13,57 +12,43 @@ print("=" * 50)
 print("  Violet Board – Starting up")
 print("=" * 50)
 
-# 1. Copy nginx.conf
+# Copy nginx config into docker/ folder
 os.makedirs("docker", exist_ok=True)
 if os.path.exists("nginx.conf") and not os.path.exists("docker/nginx.conf"):
     shutil.copy("nginx.conf", "docker/nginx.conf")
     print("[OK] nginx.conf copied")
 
-# 2. Create .env if missing
-if not os.path.exists(".env"):
-    shutil.copy(".env.docker", ".env")
-    print("[OK] .env file created")
-else:
-    print("[--] .env already exists, skipping")
-
-# 3. Fix DB_HOST – must be 'db' (Docker container name), not 127.0.0.1
-env_content = open(".env").read()
-if "DB_HOST=127.0.0.1" in env_content:
-    env_content = env_content.replace("DB_HOST=127.0.0.1", "DB_HOST=db")
-    open(".env", "w").write(env_content)
-    print("[OK] DB_HOST corrected to 'db'")
-
-# 4. Remove public/storage symlink if exists (causes Docker build error on Windows)
+# Remove public/storage symlink – causes Docker build error on Windows
 storage_link = os.path.join("public", "storage")
-if os.path.islink(storage_link) or os.path.exists(storage_link):
-    if os.path.islink(storage_link):
-        os.unlink(storage_link)
-    else:
-        shutil.rmtree(storage_link)
+if os.path.islink(storage_link):
+    os.unlink(storage_link)
     print("[OK] public/storage symlink removed (will be recreated)")
+elif os.path.isdir(storage_link):
+    shutil.rmtree(storage_link)
+    print("[OK] public/storage removed (will be recreated)")
 
-# 5. Build and start
-print("\n[..] Building and starting Docker containers (this may take a few minutes on first run)...")
+# Build and start containers
+print("\n[..] Building and starting Docker containers...")
 run("docker compose up -d --build")
 
-# 6. Wait for database
+# Wait for DB to be ready
 print("[..] Waiting for the database...")
 time.sleep(8)
 
-# 7. Generate APP_KEY if empty
-env_content = open(".env").read()
+# Generate APP_KEY if missing
+env_content = open(".env").read() if os.path.exists(".env") else ""
 if "APP_KEY=" in env_content and "APP_KEY=base64" not in env_content:
     print("[..] Generating APP_KEY...")
     run("docker compose exec app php artisan key:generate --force")
     print("[OK] APP_KEY generated")
 
-# 8. Migrate and seed
-print("[..] Running database migrations and seeders...")
+# Run migrations and seeders
+print("[..] Running migrations and seeders...")
 run("docker compose exec app php artisan migrate --force", check=False)
 run("docker compose exec app php artisan db:seed --force", check=False)
 print("[OK] Database ready")
 
-# 9. Storage link
+# Create storage symlink inside container
 run("docker compose exec app php artisan storage:link", check=False)
 
 print()

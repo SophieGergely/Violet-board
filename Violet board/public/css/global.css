@@ -6,24 +6,28 @@
 
 :root {
 
-    /* Colors — Midnight Violet */
-    --color-bg: #EDE8FA;
+    /* Colors — Violet & Teal */
+    --color-bg: #EEF0F8;
     --color-surface: #FFFFFF;
 
-    --color-primary: #7C3AED;
-    --color-primary-dark: #4A1D96;
-    --color-primary-light: #DDD1F7;
+    --color-primary: #6D28D9;
+    --color-primary-dark: #4C1D95;
+    --color-primary-light: #EDE9FE;
 
-    --color-gold: #C9A84C;
-    --color-gold-light: #FBF3D5;
+    --color-teal: #0D9488;
+    --color-teal-dark: #0F766E;
+    --color-teal-light: #CCFBF1;
 
-    --color-text: #1E0A3C;
-    --color-text-muted: #6B5F80;
+    --color-gold: #B45309;
+    --color-gold-light: #FEF3C7;
 
-    --color-border: #C4B0EC;
+    --color-text: #000000;
+    --color-text-muted: #444444;
 
-    --color-danger: #D64545;
-    --color-success: #2E9D63;
+    --color-border: #C4B5FD;
+
+    --color-danger: #DC2626;
+    --color-success: #059669;
 
     /* Typography */
     --font-display: 'Cormorant Garamond', serif;
@@ -55,9 +59,9 @@
     --radius-full: 999px;
 
     /* Shadows */
-    --shadow-sm: 0 4px 12px rgba(124,58,237,.08);
-    --shadow-md: 0 8px 24px rgba(124,58,237,.12);
-    --shadow-lg: 0 16px 40px rgba(124,58,237,.16);
+    --shadow-sm: 0 4px 12px rgba(109,40,217,.08);
+    --shadow-md: 0 8px 24px rgba(109,40,217,.12);
+    --shadow-lg: 0 16px 40px rgba(109,40,217,.16);
 
     /* Layout */
     --navbar-height: 72px;
@@ -88,7 +92,7 @@ body {
     background:
         radial-gradient(
             circle at top right,
-            rgba(124,58,237,.05),
+            rgba(109,40,217,.05),
             transparent 30%
         ),
         var(--color-bg);
@@ -126,11 +130,11 @@ a:hover {
 
     height: var(--navbar-height);
 
-    background: linear-gradient(135deg, #7C5CBF 0%, #9F7FD4 100%) !important;
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%) !important;
 
-    border-bottom: none;
+    border-bottom: 1px solid #7C3AED;
 
-    box-shadow: 0 4px 16px rgba(124,92,191,0.25);
+    box-shadow: 0 2px 8px rgba(124,58,237,0.2);
 
     padding: 0 var(--space-5) !important;
 
@@ -203,7 +207,7 @@ a:hover {
 
     border-color: var(--color-primary);
 
-    box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+    box-shadow: 0 0 0 4px rgba(109,40,217,.12);
 }
 
 /* ============================================================
@@ -213,7 +217,7 @@ a:hover {
 .btn-primary,
 .btn-dark {
 
-    background: linear-gradient(135deg, #D4B86A 0%, #B8973A 100%);
+    background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
 
     border: none;
 
@@ -233,14 +237,14 @@ a:hover {
 
     transform: translateY(-2px);
 
-    box-shadow: 0 4px 14px rgba(212,184,106,0.35);
+    box-shadow: 0 4px 16px rgba(13,148,136,0.35);
 
     color: white;
 }
 
 .btn-light {
 
-    background: var(--color-primary-light);
+    background: #FFFFFF;
 
     color: var(--color-primary);
 
@@ -257,17 +261,47 @@ a:hover {
 
 .sidebar {
 
-    background: linear-gradient(180deg, #9F7FD4 0%, #BCA4E8 100%);
+    background: linear-gradient(180deg, #8B5CF6 0%, #A78BFA 100%);
 
     border: none;
 
-    border-radius: var(--radius-lg);
+    border-radius: 0;
 
-    box-shadow: 0 8px 24px rgba(159,127,212,0.2);
+    box-shadow: 2px 0 8px rgba(124,58,237,0.2);
 
-    padding: 12px;
+    padding: 16px 12px;
 
-    align-self: flex-start;
+    /* Fixed: spans full height between navbar and footer */
+    position: fixed;
+
+    top: var(--navbar-height);
+
+    bottom: 0;
+
+    left: 0;
+
+    padding-bottom: var(--footer-height);
+
+    width: 160px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    z-index: 100;
+
+    transition: width 0.25s ease, padding 0.25s ease;
+}
+
+.sidebar.collapsed {
+
+    width: 0;
+
+    padding-left: 0;
+
+    padding-right: 0;
+
+    overflow: hidden;
 }
 
 .category-button {
@@ -278,7 +312,7 @@ a:hover {
 
     background: #ffffff;
 
-    color: #4A1D96;
+    color: #000000;
 
     border: none;
 
@@ -305,7 +339,7 @@ a:hover {
 
     background: #EDE9F8;
 
-    color: #4A1D96;
+    color: #000000;
 }
 
 /* ============================================================
@@ -318,9 +352,9 @@ a:hover {
 
     border-radius: var(--radius-lg);
 
-    border: 1px solid rgba(124,58,237,.08);
+    border: 1px solid var(--color-border);
 
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 2px 12px rgba(109,40,217,0.12);
 
     overflow: hidden;
 
@@ -337,6 +371,8 @@ a:hover {
     transform: translateY(-4px);
 
     box-shadow: var(--shadow-lg);
+
+    border-color: var(--color-teal);
 }
 
 .product-image {
@@ -375,7 +411,7 @@ a:hover {
 
 .product-details {
 
-    background: var(--color-primary-light);
+    background: var(--color-teal-light);
 
     border-radius: var(--radius-md);
 
@@ -477,7 +513,7 @@ a:hover {
 
 .quantity {
 
-    background: var(--color-primary);
+    background: var(--color-teal);
 
     color: white;
 
@@ -539,7 +575,7 @@ select:focus {
 
     border-color: var(--color-primary);
 
-    box-shadow: 0 0 0 4px rgba(124,58,237,.12);
+    box-shadow: 0 0 0 4px rgba(109,40,217,.12);
 }
 
 /* ============================================================
@@ -556,11 +592,11 @@ select:focus {
 
     flex-wrap: wrap;
 
-    background: linear-gradient(135deg, #7C5CBF 0%, #9F7FD4 100%) !important;
+    background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%) !important;
 
-    border-top: none;
+    border-top: 1px solid #7C3AED;
 
-    box-shadow: 0 -4px 16px rgba(124,92,191,0.25);
+    box-shadow: 0 -2px 8px rgba(124,58,237,0.2);
 
     position: fixed;
 
@@ -573,6 +609,8 @@ select:focus {
     padding: 10px;
 
     color: rgba(255,255,255,0.85);
+
+    z-index: 150;
 }
 
 .footer a {
@@ -592,7 +630,8 @@ select:focus {
 }
 
 .text-success {
-    color: var(--color-success);
+    color: var(--color-success) !important;
+    font-weight: 600;
 }
 
 .text-decoration-line-through {
@@ -715,7 +754,7 @@ select:focus {
 
     border-radius: 50%;
 
-    background: var(--color-primary);
+    background: var(--color-teal);
 
     border: none;
 
@@ -728,7 +767,7 @@ select:focus {
 
 .arrow-section:hover {
 
-    background: var(--color-primary-dark);
+    background: var(--color-teal-dark);
 
     box-shadow: var(--shadow-md);
 
@@ -759,13 +798,13 @@ select:focus {
 /* ── Carousel section panel ───────────────────────────────── */
 .carousel-section {
 
-    background: var(--color-primary-light);
+    background: #FFFFFF;
 
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
 
     border-radius: var(--radius-lg);
 
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 20px rgba(109,40,217,0.15);
 
     padding: 28px 24px 24px;
 
@@ -784,6 +823,21 @@ select:focus {
 .row.flex-nowrap > section.col {
     min-width: 0;
     overflow: hidden;
+    margin-left: 160px !important;
+    padding-left: 16px;
+}
+
+/* Main content area – sits next to fixed sidebar */
+.main-content {
+    margin-left: 160px;
+    padding: 16px;
+    min-width: 0;
+    overflow: hidden;
+    transition: margin-left 0.25s ease;
+}
+
+.main-content.expanded {
+    margin-left: 0;
 }
 
 /* ── Kategória oldal title ────────────────────────────────── */
@@ -807,7 +861,7 @@ select:focus {
 
     margin-bottom: 16px;
 
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-primary);
 }
 
 /* ── Dropdown gombok (Zoradiť / Filter) ───────────────────── */
@@ -850,7 +904,77 @@ select:focus {
 
 .dropdown-item:hover {
 
-    background: var(--color-primary-light);
+    background: var(--color-teal-light);
 
-    color: var(--color-primary);
+    color: var(--color-teal-dark);
+}
+
+/* ── Force black text on nav buttons and carousel headers ──── */
+.navbar .btn-light,
+.navbar button.btn {
+    color: #000000 !important;
+}
+
+.carousel-header {
+    color: #000000 !important;
+}
+
+.category-title {
+    color: #000000 !important;
+}
+
+.product-name {
+    color: #000000 !important;
+}
+
+.product-card h5 {
+    color: #000000 !important;
+}
+
+/* ── Sidebar toggle button ────────────────────────────────── */
+.sidebar-toggle {
+
+    position: fixed;
+
+    top: calc(var(--navbar-height) + 12px);
+
+    left: 160px;
+
+    z-index: 101;
+
+    width: 20px;
+
+    height: 40px;
+
+    background: #8B5CF6;
+
+    border: none;
+
+    border-radius: 0 6px 6px 0;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 10px;
+
+    color: #ffffff;
+
+    box-shadow: 2px 0 6px rgba(124,58,237,0.3);
+
+    transition: left 0.25s ease, background 0.2s;
+}
+
+.sidebar-toggle:hover {
+
+    background: #7C3AED;
+}
+
+.sidebar-toggle.collapsed {
+
+    left: 0;
 }

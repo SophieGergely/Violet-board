@@ -5,58 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registrácia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
 </head>
 
-<script src="{{ asset('js/kontrola.js') }}"></script>
-
-
-
 <body>
     <nav class="navbar navbar-light fixed-top py-2 header">
-        <div class="container">
-            <a class="navbar-brand" href="#"><img src="Pictures/logo.jpg" alt="Logo" class="logo"></a>
-            <span class="mx-auto fs-4">Registrácia zákazníka</span>
-            <button onclick="window.location.href='/'" class="btn btn-outline-dark">🏠</button>
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="/" class="navbar-home-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+            </a>
+            <span class="fw-semibold fs-5" style="color:var(--color-primary)">Registrácia zákazníka</span>
+            <div style="width:38px"></div>
         </div>
     </nav>
 
     <div class="container form-container">
         <div class="row justify-content-center">
-            <div class="col-md-6" style="margin-bottom: 80px;">
-                <div class="bg-white p-4 rounded shadow">
+            <div class="col-md-5" style="margin-bottom:80px">
+                <div class="bg-white rounded-xl shadow-lg p-5" style="border:1px solid var(--color-border);">
+                    <h4 class="text-center fw-semibold mb-4" style="color:var(--color-primary)">Vytvorte si účet</h4>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger rounded-lg mb-3">
+                            {{ $errors->first() }}
+                        </div>
+                    @endif
 
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Meno</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Zadajte vaše meno" required>
+                            <label class="form-label fw-medium">Meno</label>
+                            <input type="text" class="form-control" name="name" placeholder="Zadajte vaše meno" required>
                         </div>
-
                         <div class="mb-3">
-                            <label for="surname" class="form-label">Priezvisko</label>
-                            <input type="text" class="form-control" id="surname" name="surname" placeholder="Zadajte vaše priezvisko" required>
+                            <label class="form-label fw-medium">Priezvisko</label>
+                            <input type="text" class="form-control" name="surname" placeholder="Zadajte vaše priezvisko" required>
                         </div>
-
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Zadajte váš email" required>
+                            <label class="form-label fw-medium">Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="vas@email.com" required>
                         </div>
-
                         <div class="mb-3">
-                            <label for="password" class="form-label">Heslo (min: 6 karakter)</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Zadajte vaše heslo" required>
+                            <label class="form-label fw-medium">Heslo <span class="text-muted small">(min. 6 znakov)</span></label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="confirm-password" class="form-label">Heslo ešte raz</label>
-                            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="Zadajte vaše heslo ešte raz" required>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium">Heslo ešte raz</label>
+                            <input type="password" class="form-control" id="confirm-password" name="password_confirmation" placeholder="••••••••" required>
                         </div>
-
-                        <button type="submit" class="btn btn-dark w-100">Zaregistrovať sa</button>
+                        <button type="submit" class="btn btn-primary w-100">Zaregistrovať sa</button>
                     </form>
 
-                    <div class="text-center mt-3">Už máš účet? <a href="/prihlasenie" class="text-decoration-none">Prihlásiť sa</a></div>
+                    <p class="text-center mt-3 text-muted small">
+                        Už máš účet?
+                        <a href="/prihlasenie" style="color:var(--color-primary)">Prihlásiť sa</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -65,5 +71,7 @@
     @include('partials.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="{{ asset('js/kontrola.js') }}"></script>
 </body>
 </html>

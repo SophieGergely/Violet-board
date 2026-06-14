@@ -26,18 +26,17 @@
                 <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger">Vymazať účet</button>
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Vymazať účet</button>
                 </form>
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-outline-dark">Odhlásiť</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm">Odhlásiť</button>
                 </form>
             @else
-                <button class="btn btn-outline-primary" onclick="window.location.href='/prihlasenie'">Prihlásenie/Registrácia</button>
+                <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='/prihlasenie'">Prihlásenie/Registrácia</button>
             @endif
-
-            <button class="btn btn-outline-danger" onclick="window.location.href='/shop/oblubene'">❤️</button>
-            <button class="btn btn-outline-dark" onclick="window.location.href='/kosik'">🛒</button>
+            <button class="btn btn-outline-danger btn-sm" onclick="window.location.href='/shop/oblubene'">❤️</button>
+            <button class="btn btn-outline-dark btn-sm" onclick="window.location.href='/kosik'">🛒</button>
         </div>
 
     </div>
