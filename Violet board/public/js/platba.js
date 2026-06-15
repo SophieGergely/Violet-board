@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardExpiry  = document.getElementById('card-expiry');
     const cardCvc     = document.getElementById('card-cvc');
     const submitBtn   = document.getElementById('submit-btn');
+    const modal       = document.getElementById('dakujemeModal');
+    const form        = document.getElementById('paymentForm');
 
     let currentMethod = 'card';
 
@@ -42,24 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.classList.add('is-valid');
     }
 
-    cardNumber.addEventListener('input', () => {
-        let value = cardNumber.value.replace(/\D/g, '');
-        value = value.replace(/(.{4})(?=.)/g, '$1 ');
-        cardNumber.value = value;
-        cardNumber.classList.remove('is-invalid', 'is-valid');
-    });
-
-    cardExpiry.addEventListener('input', () => {
-        cardExpiry.classList.remove('is-invalid', 'is-valid');
-    });
-
-    cardCvc.addEventListener('input', () => {
-        cardCvc.classList.remove('is-invalid', 'is-valid');
-    });
-
-    submitBtn.addEventListener('click', (e) => {
-        if (currentMethod !== 'card') return;
-
+    function validateCard() {
         let valid = true;
 
         const cardNumClean = cardNumber.value.replace(/\s+/g, '');
@@ -76,8 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             valid = false;
         } else {
             const [mm, yy] = cardExpiry.value.split('/').map(Number);
-            const expDate  = new Date(2000 + yy, mm - 1);
-            if (expDate < new Date()) {
+            if (new Date(2000 + yy, mm - 1) < new Date()) {
                 showError(cardExpiry, 'err-expiry', 'Platnosť karty vypršala.');
                 valid = false;
             } else {
@@ -92,6 +76,33 @@ document.addEventListener('DOMContentLoaded', () => {
             clearError(cardCvc);
         }
 
-        if (!valid) e.preventDefault();
+        return valid;
+    }
+
+    cardNumber.addEventListener('input', () => {
+        let value = cardNumber.value.replace(/\D/g, '');
+        value = value.replace(/(.{4})(?=.)/g, '$1 ');
+        cardNumber.value = value;
+        cardNumber.classList.remove('is-invalid', 'is-valid');
+    });
+
+    [cardExpiry, cardCvc].forEach(input => {
+        input.addEventListener('input', () => input.classList.remove('is-invalid', 'is-valid'));
+    });
+
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (currentMethod === 'card' && !validateCard()) return;
+
+        modal.style.display = 'flex';
+
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: new FormData(form)
+        });
     });
 });

@@ -219,7 +219,7 @@ class NavBarController extends Controller
 
         return view('shop', [
             'products' => $products,
-            'categoryTitle' => 'Tvoje obľúbené produkty',
+            'categoryTitle' => 'Vaše obľúbené produkty',
             'sort' => $sort,
             'vekova_kategoria' => $maxAge,
             'hracov' => $players,

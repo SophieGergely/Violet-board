@@ -17,12 +17,13 @@
 
         <div class="row">
             <div class="col-md-8">
-                <h2 style="font-family:var(--font-body);font-size:2rem;font-weight:600;color:var(--color-primary-dark);padding-bottom:10px;margin-bottom:20px;border-bottom:2px solid var(--color-primary);display:flex;align-items:center;justify-content:center;gap:10px;">
+                <h2 style="font-family:var(--font-body);font-size:2rem;font-weight:600;color:var(--color-primary-dark);padding-bottom:4px;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:10px;">
                     Košík
-                    <span class="badge rounded-pill" style="background:var(--color-primary);font-size:0.9rem;">
-                        {{ count($cart) }}
-                    </span>
                 </h2>
+                <p class="text-center mb-4" style="color:var(--color-text-muted); border-bottom:2px solid var(--color-primary); padding-bottom:12px;">
+                    @php $totalItems = collect($cart)->sum('quantity'); @endphp
+                    Počet produktov v košíku: {{ $totalItems }}
+                </p>
 
                 @forelse ($cart as $id => $item)
                     {{-- Flowbite card style cart item --}}
@@ -69,7 +70,13 @@
                     </div>
                 @empty
                     <div class="text-center py-5">
-                        <div style="font-size:3rem;margin-bottom:16px">🛒</div>
+                        <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 8h6l8 28h28l6-20H18" stroke="#6D28D9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <circle cx="26" cy="52" r="4" fill="#6D28D9"/>
+                                <circle cx="44" cy="52" r="4" fill="#6D28D9"/>
+                            </svg>
+                        </div>
                         <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
                             Váš košík je prázdny
                         </h4>

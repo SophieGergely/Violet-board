@@ -135,12 +135,24 @@
                 </div>
             @empty
                 <div class="col-12 text-center py-5">
-                    <div style="color:var(--color-text-muted);font-size:3rem;margin-bottom:16px">🎲</div>
+                    <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 56l-3.6-3.3C14 39.6 4 30.8 4 20
+                                     4 11.2 11.2 4 20 4c4.8 0 9.4 2.2 12 5.6
+                                     C34.6 6.2 39.2 4 44 4 52.8 4 60 11.2 60 20
+                                     c0 10.8-10 19.6-24.4 32.7L32 56z"
+                                  fill="#6D28D9" stroke="#6D28D9" stroke-width="3.5" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                     <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
                         Zatiaľ žiadne obľúbené produkty
                     </h4>
                     <p style="color:var(--color-text-muted);margin-bottom:24px">
-                        Pridajte si produkty medzi obľúbené kliknutím na ❤️ pri produkte.
+                        Pridajte si produkty medzi obľúbené kliknutím na
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#DC2626" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin: 0 1px;">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        pri produkte.
                     </p>
                     <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
                 </div>

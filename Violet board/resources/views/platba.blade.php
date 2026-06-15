@@ -72,6 +72,51 @@
         </div>
     </div>
 
+    {{-- Ďakujeme modal --}}
+    <div id="dakujemeModal" style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.45);
+        align-items: center;
+        justify-content: center;
+    ">
+        <div style="
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 32px rgba(109,40,217,0.18);
+            padding: 40px 32px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+        ">
+            <div style="margin-bottom: 16px;">
+                <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4" width="64" height="64" rx="14" fill="#EDE9FE" stroke="#6D28D9" stroke-width="3.5"/>
+                    <!-- top-left -->
+                    <circle cx="22" cy="22" r="5.5" fill="#6D28D9"/>
+                    <!-- top-right -->
+                    <circle cx="50" cy="22" r="5.5" fill="#6D28D9"/>
+                    <!-- middle-left -->
+                    <circle cx="22" cy="36" r="5.5" fill="#6D28D9"/>
+                    <!-- middle-right -->
+                    <circle cx="50" cy="36" r="5.5" fill="#6D28D9"/>
+                    <!-- bottom-left -->
+                    <circle cx="22" cy="50" r="5.5" fill="#6D28D9"/>
+                    <!-- bottom-right -->
+                    <circle cx="50" cy="50" r="5.5" fill="#6D28D9"/>
+                </svg>
+            </div>
+            <h3 class="fw-bold mb-2" style="color: var(--color-primary-dark);">Ďakujeme za Váš nákup!</h3>
+            <p class="text-muted mb-4">Vaša objednávka bola úspešne prijatá.</p>
+            <div class="d-flex flex-column gap-2">
+                <button class="btn btn-primary" onclick="window.location.href='/'">Prejsť na domovskú stránku</button>
+                <button class="btn btn-dark" onclick="window.location.href='/shop'">Prejsť na zoznam produktov</button>
+            </div>
+        </div>
+    </div>
+
     @include('partials.footer')
 
     <script src="{{ asset('js/platba.js') }}"></script>
