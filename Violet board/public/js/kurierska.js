@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#shipping-form');
-    const inputs = form.querySelectorAll('input');
+    const inputs = form.querySelectorAll('input, select');
     const nextButton = document.getElementById('next-button');
 
     nextButton.disabled = true;
@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (input.required && value === '') {
                 isValid = false;
                 input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
             } else if (pattern && !(new RegExp(pattern).test(value))) {
                 isValid = false;
                 input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
             } else {
                 input.classList.remove('is-invalid');
                 input.classList.add('is-valid');
@@ -33,15 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             input.classList.remove('is-invalid', 'is-valid');
             validateForm();
         });
-    });
-
-    nextButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (validateForm()) {
-            window.location.href = '/platba';
-
-        } else {
-            alert('Vyplňte správne všetky polia formulára.');
-        }
+        input.addEventListener('change', () => {
+            validateForm();
+        });
     });
 });

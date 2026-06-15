@@ -1,40 +1,42 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const submitBtn = document.getElementById('submit-btn');
     const form = document.getElementById('shipping-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const inputs = form.querySelectorAll('input, select');
 
-    submitBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const inputs = form.querySelectorAll('input, select' );
+    submitBtn.disabled = true;
+
+    function validateForm() {
         let isValid = true;
 
         inputs.forEach(input => {
             const pattern = input.getAttribute('pattern');
-            const regex = pattern ? new RegExp(pattern) : null;
+            const value = input.value.trim();
 
-            if (!input.value || (regex && !regex.test(input.value))) {
+            if (input.required && value === '') {
+                isValid = false;
                 input.classList.add('is-invalid');
                 input.classList.remove('is-valid');
+            } else if (pattern && !(new RegExp(pattern).test(value))) {
                 isValid = false;
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
             } else {
                 input.classList.remove('is-invalid');
                 input.classList.add('is-valid');
             }
         });
-        
 
-        const boxSelect = form.querySelector('select[name="box_id"]');
-        if (!boxSelect.value) {
-            boxSelect.classList.add('is-invalid');
-            alert('Prosím, vyberte si box!');
-            isValid = false;
-        } else {
-            boxSelect.classList.remove('is-invalid');
-        }
+        submitBtn.disabled = !isValid;
+        return isValid;
+    }
 
-        if (!isValid) {
-            e.preventDefault();
-        } else {
-            form.submit();
-        }
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            input.classList.remove('is-invalid', 'is-valid');
+            validateForm();
+        });
+        input.addEventListener('change', () => {
+            validateForm();
+        });
     });
 });
