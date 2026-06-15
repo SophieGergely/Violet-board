@@ -6,7 +6,7 @@
 
 :root {
 
-    /* Colors — Violet & Teal */
+    /* Colors — Violet & Silver */
     --color-bg: #EEF0F8;
     --color-surface: #FFFFFF;
 
@@ -14,12 +14,12 @@
     --color-primary-dark: #4C1D95;
     --color-primary-light: #EDE9FE;
 
-    --color-teal: #0D9488;
-    --color-teal-dark: #0F766E;
-    --color-teal-light: #CCFBF1;
+    --color-teal: #6B7280;
+    --color-teal-dark: #4B5563;
+    --color-teal-light: #F3F4F6;
 
-    --color-gold: #B45309;
-    --color-gold-light: #FEF3C7;
+    --color-gold: #6B7280;
+    --color-gold-light: #F3F4F6;
 
     --color-text: #000000;
     --color-text-muted: #444444;
@@ -214,10 +214,9 @@ a:hover {
    BUTTONS
    ============================================================ */
 
-.btn-primary,
-.btn-dark {
+.btn-primary {
 
-    background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
 
     border: none;
 
@@ -232,12 +231,37 @@ a:hover {
     transition: .2s ease;
 }
 
-.btn-primary:hover,
+.btn-primary:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 16px rgba(109,40,217,0.35);
+
+    color: white;
+}
+
+.btn-dark {
+
+    background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+
+    border: none;
+
+    color: white;
+
+    border-radius: var(--radius-full);
+
+    font-family: var(--font-body);
+
+    font-weight: 600;
+
+    transition: .2s ease;
+}
+
 .btn-dark:hover {
 
     transform: translateY(-2px);
 
-    box-shadow: 0 4px 16px rgba(13,148,136,0.35);
+    box-shadow: 0 4px 16px rgba(107,114,128,0.35);
 
     color: white;
 }
@@ -434,30 +458,31 @@ a:hover {
 
     position: absolute;
 
-    top: 10px;
-    right: 10px;
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
+    top: 12px;
+    right: 12px;
 
     border: none;
 
-    background: white;
+    background: none;
 
-    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    box-shadow: var(--shadow-sm);
+    cursor: pointer;
 
-    transition: .2s ease;
+    padding: 0;
+
+    transition: transform .2s ease;
+}
+
+.heart-icon svg {
+    width: 26px;
+    height: 26px;
 }
 
 .heart-icon:hover {
-
-    background: var(--color-primary);
-
-    color: white;
+    transform: scale(1.1);
 }
 
 /* ============================================================
@@ -902,9 +927,9 @@ select:focus {
 /* ── Dropdown gombok (Zoradiť / Filter) ───────────────────── */
 .btn-outline-secondary {
 
-    color: var(--color-primary) !important;
+    color: #4B5563 !important;
 
-    border-color: var(--color-primary) !important;
+    border-color: #4B5563 !important;
 
     background: transparent !important;
 
@@ -919,11 +944,11 @@ select:focus {
 .btn-outline-secondary:focus,
 .btn-outline-secondary.show {
 
-    background: var(--color-primary) !important;
+    background: #4B5563 !important;
 
     color: #ffffff !important;
 
-    border-color: var(--color-primary) !important;
+    border-color: #4B5563 !important;
 
     box-shadow: none !important;
 }

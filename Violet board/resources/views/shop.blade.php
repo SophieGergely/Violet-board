@@ -106,16 +106,20 @@
                         <div class="shop-product-card">
                             <form action="{{ route('product.favorite', $product->id) }}" method="POST">
                                 @csrf
-                                <button class="heart-icon" type="submit">❤️</button>
+                                <button class="heart-icon" type="submit">
+                                    <svg viewBox="0 0 24 24" fill="{{ $product->is_favorite ? '#DC2626' : '#D1D5DB' }}" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                </button>
                             </form>
                             <div class="product-image">
                                 <img src="{{ asset('Pictures/' . $product->images->first()->filename) }}" alt="{{ $product->name }}">
                             </div>
-                            <div class="product-details">
+                            <div class="product-details" style="{{ $product->is_discounted && $product->discounted_price ? 'background:#DCFCE7;' : '' }}">
                                 <h5>{{ $product->name }}</h5>
                                 <p class="mb-1">
                                     @if($product->is_discounted && $product->discounted_price)
-                                        <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }}€</span>
+                                        <span class="text-decoration-line-through text-muted small">{{ number_format($product->price, 2) }}€</span>
                                         <span class="text-success fw-bold ms-1">{{ number_format($product->discounted_price, 2) }}€</span>
                                     @else
                                         <span>{{ number_format($product->price, 2) }}€</span>
