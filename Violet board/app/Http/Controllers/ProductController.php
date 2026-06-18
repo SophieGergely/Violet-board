@@ -193,15 +193,25 @@ class ProductController extends Controller
     public function updateCartQuantity(Request $request, $id)
     {
         $cart = session()->get('cart', []);
+        $removed = false;
 
         if (isset($cart[$id])) {
             if ($request->action === 'increase') {
                 $cart[$id]['quantity']++;
-            } elseif ($request->action === 'decrease' && $cart[$id]['quantity'] > 1) {
+            } elseif ($request->action === 'decrease') {
                 $cart[$id]['quantity']--;
+                if ($cart[$id]['quantity'] <= 0) {
+                    unset($cart[$id]);
+                    $removed = true;
+                }
             } elseif ($request->action === 'set') {
                 $newQuantity = (int) $request->input('quantity', 1);
-                $cart[$id]['quantity'] = max(1, $newQuantity);
+                if ($newQuantity <= 0) {
+                    unset($cart[$id]);
+                    $removed = true;
+                } else {
+                    $cart[$id]['quantity'] = $newQuantity;
+                }
             }
         }
 
@@ -224,6 +234,7 @@ class ProductController extends Controller
             }
 
             return response()->json([
+                'removed' => $removed,
                 'quantity' => $item['quantity'] ?? null,
                 'item_total_html' => $itemTotalHtml,
                 'cart_total' => number_format(collect($cart)->sum(fn($i) => $i['price'] * $i['quantity']), 2),

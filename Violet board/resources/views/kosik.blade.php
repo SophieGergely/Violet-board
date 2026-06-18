@@ -29,10 +29,12 @@
                 @forelse ($cart as $id => $item)
                     {{-- Flowbite card style cart item --}}
                     <div class="cart-item d-flex align-items-center gap-3" data-product-id="{{ $id }}">
-                        <img src="{{ asset('Pictures/' . $item['image']) }}" alt="{{ $item['name'] }}"
-                            class="rounded" style="width:60px;height:60px;object-fit:cover;">
+                        <a href="{{ route('product.show', $id) }}?from_label={{ urlencode('Košík') }}&from_url={{ urlencode(url()->current()) }}" class="d-flex align-items-center gap-3 text-decoration-none text-dark flex-grow-1">
+                            <img src="{{ asset('Pictures/' . $item['image']) }}" alt="{{ $item['name'] }}"
+                                class="rounded" style="width:60px;height:60px;object-fit:cover;">
 
-                        <div class="grow fw-medium">{{ $item['name'] }}</div>
+                            <div class="fw-medium">{{ $item['name'] }}</div>
+                        </a>
 
                         {{-- Quantity controls --}}
                         <div class="d-flex align-items-center gap-1">
@@ -108,7 +110,7 @@
                         Vybrať spôsob doručenia
                     </button>
                     <a href="/shop" class="btn w-100 mt-2" style="background:var(--color-primary-light);color:var(--color-primary);border-radius:var(--radius-full);font-weight:500;">
-                        ← Späť nakupovať
+                        ← Späť do obchodu
                     </a>
                 </div>
             </div>

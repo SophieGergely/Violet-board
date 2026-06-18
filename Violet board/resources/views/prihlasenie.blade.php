@@ -53,6 +53,12 @@
                     Ešte nemáte účet?
                     <a href="/registracia" style="color:var(--color-primary)">Zaregistrovať sa</a>
                 </p>
+
+                <hr class="my-4">
+
+                <a href="{{ url('/') }}" class="btn w-100" style="background:var(--color-primary-light);color:var(--color-primary);border-radius:var(--radius-full);font-weight:500;">
+                    Nakupovať ako hosť
+                </a>
             </div>
         </div>
     </div>

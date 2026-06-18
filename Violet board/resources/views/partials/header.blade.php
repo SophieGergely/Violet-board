@@ -8,6 +8,7 @@
                     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                 </svg>
             </a>
+
             <form action="{{ route('search') }}" method="GET" class="d-flex">
                 <input type="text" name="query" class="search-bar" placeholder="Zadajte, čo hľadáte...">
             </form>
@@ -25,19 +26,38 @@
 
             {{-- Asztali gombok --}}
             <div class="d-none d-lg-flex align-items-center gap-2">
-                @if(Auth::check())
-                    <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn-navbar-action btn-navbar-danger">Vymazať účet</button>
-                    </form>
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn-navbar-action btn-navbar-ghost">Odhlásiť</button>
-                    </form>
-                @else
+                @guest
                     <button class="btn-navbar-action btn-navbar-ghost" onclick="window.location.href='/prihlasenie'">Prihlásenie / Registrácia</button>
-                @endif
+                @endguest
+
+                @auth
+                    <div class="navbar-user-wrap">
+                        <button
+                            type="button"
+                            class="navbar-icon-btn navbar-user-toggle"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                            aria-label="Účet"
+                            title="Účet"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.68-10 5v3h20v-3c0-3.32-6.67-5-10-5z"/>
+                            </svg>
+                        </button>
+
+                        <div class="navbar-user-menu">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="navbar-user-menu-item">Odhlásiť</button>
+                            </form>
+                            <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="navbar-user-menu-item navbar-user-menu-item--danger">Vymazať účet</button>
+                            </form>
+                        </div>
+                    </div>
+                @endauth
 
                 <a href="/shop/oblubene" class="navbar-icon-btn" title="Obľúbené">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -52,7 +72,36 @@
                 </a>
             </div>
 
-            {{-- Mobilon: kosár + hamburger --}}
+            {{-- Mobilon: fiók + kosár + hamburger --}}
+            @auth
+                <div class="navbar-user-wrap d-lg-none">
+                    <button
+                        type="button"
+                        class="navbar-icon-btn navbar-user-toggle"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        aria-label="Účet"
+                        title="Účet"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.68-10 5v3h20v-3c0-3.32-6.67-5-10-5z"/>
+                        </svg>
+                    </button>
+
+                    <div class="navbar-user-menu">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="navbar-user-menu-item">Odhlásiť</button>
+                        </form>
+                        <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="navbar-user-menu-item navbar-user-menu-item--danger">Vymazať účet</button>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+
             <a href="/kosik" class="navbar-icon-btn d-lg-none" title="Košík">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.83 14l.94-2h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L20.1 3H4.21L3.27 1H0v2h2l3.6 7.59L4.25 13c-.16.28-.25.61-.25.95C4 15.1 4.9 16 6 16h14v-2H6.42c-.14 0-.25-.11-.25-.25l.03-.14.55-1.61z"/>
@@ -91,19 +140,9 @@
     </div>
 
     <div class="d-flex flex-column gap-2 mt-2" style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px;">
-        @if(Auth::check())
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn-navbar-action btn-navbar-ghost w-100">Odhlásiť</button>
-            </form>
-            <form action="{{ route('profil.zmazat') }}" method="POST" onsubmit="return confirm('Naozaj chcete vymazať svoj účet?');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-navbar-action btn-navbar-danger w-100">Vymazať účet</button>
-            </form>
-        @else
+        @guest
             <button class="btn-navbar-action btn-navbar-ghost w-100" onclick="window.location.href='/prihlasenie'">Prihlásenie / Registrácia</button>
-        @endif
+        @endguest
     </div>
 </div>
 
@@ -112,5 +151,30 @@
         const menu = document.getElementById('mobileMenu');
         const isOpen = menu.style.display === 'flex';
         menu.style.display = isOpen ? 'none' : 'flex';
+    });
+
+    document.querySelectorAll('.navbar-user-wrap').forEach(function (wrap) {
+        const btn = wrap.querySelector('.navbar-user-toggle');
+        const menu = wrap.querySelector('.navbar-user-menu');
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = menu.classList.contains('show');
+            document.querySelectorAll('.navbar-user-menu.show').forEach(m => m.classList.remove('show'));
+            menu.classList.toggle('show', !isOpen);
+            btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        document.querySelectorAll('.navbar-user-wrap').forEach(function (wrap) {
+            if (!wrap.contains(e.target)) {
+                const menu = wrap.querySelector('.navbar-user-menu');
+                const btn = wrap.querySelector('.navbar-user-toggle');
+                if (menu) menu.classList.remove('show');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
 </script>

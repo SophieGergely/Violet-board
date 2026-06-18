@@ -39,6 +39,9 @@
     </button>
 
     <div class="d-flex flex-column">
+        <div class="sidebar-title">Kategórie</div>
+        <hr class="sidebar-title-divider">
+
         <a href="{{ url('/shop') }}" class="category-button {{ request()->is('shop') ? 'active' : '' }}">Všetky hry</a>
         <hr style="border-color: rgba(255,255,255,0.4); margin: 6px 0; border-width: 2px; opacity: 1;">
 
@@ -49,8 +52,8 @@
                 'party' => 'Party hry',
                 'rodinne' => 'Rodinné hry',
                 'deti' => 'Pre deti',
-                'strategia' => 'Štrategické hry',
-                'puzzle' => 'Puzzle',
+                'strategia' => 'Strategické hry',
+                'puzzle' => 'Logické hry',
                 'pamat' => 'Pamäťové hry',
             ];
         @endphp

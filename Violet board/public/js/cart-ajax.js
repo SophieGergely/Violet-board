@@ -54,6 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (counter) counter.style.display = 'flex';
     }
 
+    function handleRemoved(container) {
+        if (!container) return;
+        const addForm = container.querySelector('.ajax-add-form');
+        const counter = container.querySelector('.cart-counter');
+
+        if (addForm && counter) {
+            counter.style.display = 'none';
+            addForm.style.display = 'block';
+        } else {
+            container.remove();
+        }
+    }
+
     document.addEventListener('submit', async (e) => {
         const form = e.target;
         if (!(form instanceof HTMLFormElement) || !form.classList.contains('ajax-cart-form')) return;
@@ -70,6 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const container = form.closest('[data-product-id]');
 
+        if (data.removed) {
+            handleRemoved(container);
+            return;
+        }
+
         if (form.classList.contains('ajax-add-form')) {
             showCounter(container);
         }
@@ -83,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!url) return;
 
             let qty = parseInt(input.value, 10);
-            if (isNaN(qty) || qty < 1) qty = 1;
+            if (isNaN(qty)) qty = 1;
+            if (qty < 0) qty = 0;
             input.value = qty;
 
             const formData = new FormData();
@@ -93,6 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const container = input.closest('[data-product-id]');
             const data = await sendCartRequest(url, formData);
+            if (!data) return;
+
+            if (data.removed) {
+                handleRemoved(container);
+                return;
+            }
+
             applyResult(container, data);
         });
 
