@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
@@ -59,6 +60,19 @@
         @include('partials.breadcrumb', ['items' => $breadcrumbItems, 'extraClass' => 'page-breadcrumb--clear-toggle'])
 
         <div class="category-title">{{ $categoryTitle ?? 'Shop' }}</div>
+
+        @if (request()->is('search'))
+            <div class="text-center mb-3">
+                <a href="{{ url('/shop') }}" class="search-clear-pill">
+                    Zrušiť vyhľadávanie
+                    <span class="search-clear-pill-x">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2.5" d="M6 18 18 6M6 6l12 12"/>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        @endif
 
         {{-- Sort & Filter --}}
         @php
@@ -209,23 +223,26 @@
         </div>
 
         {{-- Product grid --}}
+        @php $cart = session('cart', []); @endphp
         <div class="row g-3">
             @forelse ($products as $product)
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                    <a href="{{ route('product.show', $product->id) }}?from_label={{ urlencode($categoryTitle ?? 'Shop') }}&from_url={{ urlencode(url()->current()) }}" class="text-decoration-none text-dark d-block h-100">
-                        <div class="shop-product-card">
-                            <form action="{{ route('product.favorite', $product->id) }}" method="POST">
-                                @csrf
-                                <button class="heart-icon" type="submit">
-                                    <svg viewBox="0 0 24 24" fill="{{ $product->is_favorite ? '#DC2626' : '#D1D5DB' }}" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                    </svg>
-                                </button>
-                            </form>
+                    <div class="shop-product-card h-100">
+                        <form action="{{ route('product.favorite', $product->id) }}" method="POST">
+                            @csrf
+                            <button class="heart-icon" type="submit">
+                                <svg viewBox="0 0 24 24" fill="{{ $product->is_favorite ? '#DC2626' : '#D1D5DB' }}" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </button>
+                        </form>
+                        <a href="{{ route('product.show', $product->id) }}?from_label={{ urlencode($categoryTitle ?? 'Shop') }}&from_url={{ urlencode(url()->current()) }}" class="text-decoration-none text-dark d-block">
                             <div class="product-image">
                                 <img src="{{ asset('Pictures/' . $product->images->first()->filename) }}" alt="{{ $product->name }}">
                             </div>
-                            <div class="product-details" style="{{ $product->is_discounted && $product->discounted_price ? 'background:#DCFCE7;' : '' }}">
+                        </a>
+                        <div class="product-details" style="{{ $product->is_discounted && $product->discounted_price ? 'background:#DCFCE7;' : '' }}">
+                            <a href="{{ route('product.show', $product->id) }}?from_label={{ urlencode($categoryTitle ?? 'Shop') }}&from_url={{ urlencode(url()->current()) }}" class="text-decoration-none text-dark d-block">
                                 <h5>{{ $product->name }}</h5>
                                 <p class="mb-1">
                                     @if($product->is_discounted && $product->discounted_price)
@@ -235,13 +252,34 @@
                                         <span>{{ number_format($product->price, 2) }}€</span>
                                     @endif
                                 </p>
-                                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                                    @csrf
-                                    <button class="btn btn-primary w-100 btn-sm" type="submit">Pridať do košíka</button>
-                                </form>
-                            </div>
+                            </a>
+                                <div class="cart-control" data-product-id="{{ $product->id }}">
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="ajax-cart-form ajax-add-form" style="display:{{ isset($cart[$product->id]) ? 'none' : 'block' }};">
+                                        @csrf
+                                        <button class="btn btn-primary w-100 btn-sm" type="submit">Pridať do košíka</button>
+                                    </form>
+                                    <div class="cart-counter" style="display:{{ isset($cart[$product->id]) ? 'flex' : 'none' }};">
+                                        <form action="{{ route('cart.update', $product->id) }}" method="POST" class="ajax-cart-form">
+                                            @csrf
+                                            <input type="hidden" name="action" value="decrease">
+                                            <button type="submit" class="cart-counter-btn">−</button>
+                                        </form>
+                                        <input
+                                            type="number"
+                                            class="cart-counter-input js-cart-qty-input"
+                                            value="{{ $cart[$product->id]['quantity'] ?? 1 }}"
+                                            min="1"
+                                            data-update-url="{{ route('cart.update', $product->id) }}"
+                                        >
+                                        <form action="{{ route('cart.update', $product->id) }}" method="POST" class="ajax-cart-form">
+                                            @csrf
+                                            <input type="hidden" name="action" value="increase">
+                                            <button type="submit" class="cart-counter-btn">+</button>
+                                        </form>
+                                    </div>
+                                </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             @empty
                 <div class="col-12 text-center py-5">
@@ -279,6 +317,7 @@
 
     <script src="{{ asset('js/sidebar-toggle.js') }}"></script>
     <script src="{{ asset('js/price-range.js') }}"></script>
+    <script src="{{ asset('js/cart-ajax.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

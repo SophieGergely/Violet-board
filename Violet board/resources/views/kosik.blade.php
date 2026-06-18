@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Košík</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
@@ -22,12 +23,12 @@
                 </h2>
                 <p class="text-center mb-4" style="color:var(--color-text-muted); border-bottom:2px solid var(--color-primary); padding-bottom:12px;">
                     @php $totalItems = collect($cart)->sum('quantity'); @endphp
-                    Počet produktov v košíku: {{ $totalItems }}
+                    Počet produktov v košíku: <span class="cart-grand-count">{{ $totalItems }}</span>
                 </p>
 
                 @forelse ($cart as $id => $item)
                     {{-- Flowbite card style cart item --}}
-                    <div class="cart-item d-flex align-items-center gap-3">
+                    <div class="cart-item d-flex align-items-center gap-3" data-product-id="{{ $id }}">
                         <img src="{{ asset('Pictures/' . $item['image']) }}" alt="{{ $item['name'] }}"
                             class="rounded" style="width:60px;height:60px;object-fit:cover;">
 
@@ -35,21 +36,27 @@
 
                         {{-- Quantity controls --}}
                         <div class="d-flex align-items-center gap-1">
-                            <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline">
+                            <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline ajax-cart-form">
                                 @csrf
                                 <input type="hidden" name="action" value="decrease">
-                                <button class="btn btn-sm btn-outline-secondary px-2">−</button>
+                                <button class="btn btn-sm btn-outline-secondary px-2" type="submit">−</button>
                             </form>
-                            <span class="quantity px-3">{{ $item['quantity'] }}</span>
-                            <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline">
+                            <input
+                                type="number"
+                                class="quantity js-cart-qty-input"
+                                value="{{ $item['quantity'] }}"
+                                min="1"
+                                data-update-url="{{ route('cart.update', ['id' => $id]) }}"
+                            >
+                            <form action="{{ route('cart.update', ['id' => $id]) }}" method="POST" class="d-inline ajax-cart-form">
                                 @csrf
                                 <input type="hidden" name="action" value="increase">
-                                <button class="btn btn-sm btn-outline-secondary px-2">+</button>
+                                <button class="btn btn-sm btn-outline-secondary px-2" type="submit">+</button>
                             </form>
                         </div>
 
                         {{-- Price --}}
-                        <div class="fw-semibold" style="min-width:80px;text-align:right;">
+                        <div class="fw-semibold item-total" style="min-width:80px;text-align:right;">
                             @if (!empty($item['is_discounted']) && $item['is_discounted'])
                                 <div class="text-decoration-line-through text-muted small">
                                     {{ number_format($item['original_price'] * $item['quantity'], 2) }} €
@@ -94,14 +101,14 @@
                     <h5 class="fw-semibold mb-3">Súhrn objednávky</h5>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Spolu:</span>
-                        <span class="fw-bold">{{ number_format(collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']), 2) }} €</span>
+                        <span class="fw-bold cart-grand-total">{{ number_format(collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']), 2) }} €</span>
                     </div>
                     <hr>
                     <button onclick="checkCart()" class="btn btn-primary w-100 mt-2">
                         Vybrať spôsob doručenia
                     </button>
                     <a href="/shop" class="btn w-100 mt-2" style="background:var(--color-primary-light);color:var(--color-primary);border-radius:var(--radius-full);font-weight:500;">
-                        ← Späť do obchodu
+                        ← Späť nakupovať
                     </a>
                 </div>
             </div>
@@ -112,6 +119,7 @@
 
     <script>window.cartData = @json(session('cart', []));</script>
     <script src="{{ asset('js/kosik.js') }}"></script>
+    <script src="{{ asset('js/cart-ajax.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>

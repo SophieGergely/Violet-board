@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Detaily o produkte - {{ $product->name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/global.css') }}">
@@ -74,17 +75,6 @@
                     @endforeach
                 </div>
 
-                <p class="price">
-
-                    @if ($product->is_discounted && $product->discounted_price)
-                        <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }} €</span>
-                        <span class="text-success fw-bold ms-2">{{ number_format($product->discounted_price, 2) }} €</span>
-                    @else
-                        <span>{{ number_format($product->price, 2) }} €</span>
-                    @endif
-
-                </p>
-
                 <div class="stock-status {{ $product->in_stock ? 'in-stock' : 'out-of-stock' }}">
                     @if ($product->in_stock)
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,20 +89,47 @@
                     @endif
                 </div>
 
+                <p class="price">
+
+                    @if ($product->is_discounted && $product->discounted_price)
+                        <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }} €</span>
+                        <span class="text-success fw-bold ms-2">{{ number_format($product->discounted_price, 2) }} €</span>
+                    @else
+                        <span>{{ number_format($product->price, 2) }} €</span>
+                    @endif
+
+                </p>
                 <div class="d-flex align-items-center gap-2 mt-2">
 
+                    @php $cart = session('cart', []); @endphp
                     @if (!$product->in_stock)
                     <button type="button" class="btn btn-secondary" disabled>Vypredané</button>
-                    @elseif ($isInCart)
-                    <form action="{{ route('cart.remove', ['id' => $product->id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger">Odobrať z košíka</button>
-                    </form>
                     @else
-                    <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Pridať do košíka</button>
-                    </form>
+                    <div class="cart-control" data-product-id="{{ $product->id }}">
+                        <form action="{{ route('cart.add', ['id' => $product->id]) }}" method="POST" class="ajax-cart-form ajax-add-form" style="display:{{ $isInCart ? 'none' : 'block' }};">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Pridať do košíka</button>
+                        </form>
+                        <div class="cart-counter" style="width: 140px; height: 40px; display:{{ $isInCart ? 'flex' : 'none' }};">
+                            <form action="{{ route('cart.update', ['id' => $product->id]) }}" method="POST" class="ajax-cart-form">
+                                @csrf
+                                <input type="hidden" name="action" value="decrease">
+                                <button type="submit" class="cart-counter-btn">−</button>
+                            </form>
+                            <input
+                                type="number"
+                                class="cart-counter-input js-cart-qty-input"
+                                value="{{ $cart[$product->id]['quantity'] ?? 1 }}"
+                                min="1"
+                                data-update-url="{{ route('cart.update', ['id' => $product->id]) }}"
+                            >
+                            <form action="{{ route('cart.update', ['id' => $product->id]) }}" method="POST" class="ajax-cart-form">
+                                @csrf
+                                <input type="hidden" name="action" value="increase">
+                                <button type="submit" class="cart-counter-btn">+</button>
+                            </form>
+                        </div>
+                    </div>
                     @endif
 
                     <form action="{{ route('favorite.toggle', ['id' => $product->id]) }}" method="POST">
@@ -145,6 +162,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/detaily.js') }}"></script>
+    <script src="{{ asset('js/cart-ajax.js') }}"></script>
 
 </body>
 </html>

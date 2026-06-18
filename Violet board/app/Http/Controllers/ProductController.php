@@ -155,6 +155,14 @@ class ProductController extends Controller
             session()->put('cart', $cartItems);
         }
 
+        if (request()->wantsJson()) {
+            $finalCart = session('cart', []);
+            return response()->json([
+                'quantity' => $finalCart[$id]['quantity'] ?? 1,
+                'cart_count' => collect($finalCart)->sum('quantity'),
+            ]);
+        }
+
         return redirect()->back();
     }
 
@@ -191,11 +199,38 @@ class ProductController extends Controller
                 $cart[$id]['quantity']++;
             } elseif ($request->action === 'decrease' && $cart[$id]['quantity'] > 1) {
                 $cart[$id]['quantity']--;
+            } elseif ($request->action === 'set') {
+                $newQuantity = (int) $request->input('quantity', 1);
+                $cart[$id]['quantity'] = max(1, $newQuantity);
             }
         }
 
         session()->put('cart', $cart);
         $this->saveCartToDatabase();
+
+        if ($request->wantsJson()) {
+            $item = $cart[$id] ?? null;
+            $itemTotalHtml = null;
+
+            if ($item) {
+                if (!empty($item['is_discounted'])) {
+                    $itemTotalHtml = '<div class="text-decoration-line-through text-muted small">'
+                        . number_format($item['original_price'] * $item['quantity'], 2) . ' €</div>'
+                        . '<div class="text-success">'
+                        . number_format($item['price'] * $item['quantity'], 2) . ' €</div>';
+                } else {
+                    $itemTotalHtml = number_format($item['price'] * $item['quantity'], 2) . ' €';
+                }
+            }
+
+            return response()->json([
+                'quantity' => $item['quantity'] ?? null,
+                'item_total_html' => $itemTotalHtml,
+                'cart_total' => number_format(collect($cart)->sum(fn($i) => $i['price'] * $i['quantity']), 2),
+                'cart_count' => collect($cart)->sum('quantity'),
+            ]);
+        }
+
         return redirect()->back();
     }
 
