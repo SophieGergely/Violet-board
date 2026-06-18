@@ -20,6 +20,7 @@ class Product extends Model
         'min_age',
         'min_players',
         'max_players',
+        'in_stock',
     ];
 
     public function images()
@@ -33,7 +34,7 @@ class Product extends Model
         return asset('Pictures/' . Str::slug($this->name) . '1.jpg');
     }
 
-    
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
@@ -43,5 +44,5 @@ class Product extends Model
     {
         return $query->whereNotNull('discounted_price');
     }
-   
+
 }

@@ -12,13 +12,18 @@ class ProductController extends Controller
 {
     public function show($id)
     {
-        $product = Product::with(['images' => function($query) {
-            $query->orderBy('filename');
-        }])->findOrFail($id);
+        $product = Product::with([
+            'images' => function($query) {
+                $query->orderBy('filename');
+            },
+            'categories',
+        ])->findOrFail($id);
 
         return view('detaily', [
             'product' => $product,
             'isInCart' => ProductController::isInCart($product->id),
+            'fromLabel' => request('from_label'),
+            'fromUrl' => request('from_url'),
         ]);
     }
 

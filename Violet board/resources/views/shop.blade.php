@@ -212,7 +212,7 @@
         <div class="row g-3">
             @forelse ($products as $product)
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                    <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none text-dark d-block h-100">
+                    <a href="{{ route('product.show', $product->id) }}?from_label={{ urlencode($categoryTitle ?? 'Shop') }}&from_url={{ urlencode(url()->current()) }}" class="text-decoration-none text-dark d-block h-100">
                         <div class="shop-product-card">
                             <form action="{{ route('product.favorite', $product->id) }}" method="POST">
                                 @csrf

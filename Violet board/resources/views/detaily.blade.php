@@ -20,11 +20,16 @@
     @include('partials.header')
 
     <div class="container" style="padding-top: 16px;">
-        @include('partials.breadcrumb', ['items' => [
-            ['label' => 'Domov', 'url' => url('/')],
-            ['label' => 'Shop', 'url' => url('/shop')],
-            ['label' => $product->name],
-        ]])
+        @php
+            $breadcrumbItems = [['label' => 'Domov', 'url' => url('/')]];
+            if (!empty($fromLabel) && !empty($fromUrl)) {
+                $breadcrumbItems[] = ['label' => $fromLabel, 'url' => $fromUrl];
+            } else {
+                $breadcrumbItems[] = ['label' => 'Shop', 'url' => url('/shop')];
+            }
+            $breadcrumbItems[] = ['label' => $product->name];
+        @endphp
+        @include('partials.breadcrumb', ['items' => $breadcrumbItems])
     </div>
 
     <div class="container product-container">
@@ -46,7 +51,29 @@
                 </div>
             </div>
             <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center">
-                <h2>{{ $product->name }}</h2>
+
+                @php
+                    $frameLabels = [];
+                    if ($product->is_discounted) $frameLabels[] = 'Akcia';
+                    if ($product->is_new) $frameLabels[] = 'Novinka';
+                    if ($product->is_best_seller) $frameLabels[] = 'Best seller';
+                    $frameClass = $product->is_discounted
+                        ? 'product-frame--sale'
+                        : (count($frameLabels) ? 'product-frame--highlight' : '');
+                @endphp
+                <div class="product-frame {{ $frameClass }}">
+                    <h2>{{ $product->name }}</h2>
+                    @if (count($frameLabels))
+                        <div class="product-frame-label">{{ implode(' · ', $frameLabels) }}</div>
+                    @endif
+                </div>
+
+                <div class="product-badges">
+                    @foreach ($product->categories as $cat)
+                        <a href="{{ url('/shop/' . $cat->slug) }}" class="badge-pill badge-category">{{ $cat->name }}</a>
+                    @endforeach
+                </div>
+
                 <p class="price">
 
                     @if ($product->is_discounted && $product->discounted_price)
@@ -57,9 +84,26 @@
                     @endif
 
                 </p>
+
+                <div class="stock-status {{ $product->in_stock ? 'in-stock' : 'out-of-stock' }}">
+                    @if ($product->in_stock)
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="m5 13 4 4L19 7"/>
+                        </svg>
+                        Skladom
+                    @else
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2.5" d="M6 18 18 6M6 6l12 12"/>
+                        </svg>
+                        Vypredané
+                    @endif
+                </div>
+
                 <div class="d-flex align-items-center gap-2 mt-2">
 
-                    @if ($isInCart)
+                    @if (!$product->in_stock)
+                    <button type="button" class="btn btn-secondary" disabled>Vypredané</button>
+                    @elseif ($isInCart)
                     <form action="{{ route('cart.remove', ['id' => $product->id]) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger">Odobrať z košíka</button>
@@ -83,7 +127,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <a href="{{ url('/shop') }}" class="btn btn-dark">← Späť do shopu</a>
+                    <a href="{{ url('/shop') }}" class="btn" style="background:var(--color-primary-light);color:var(--color-primary);border-radius:var(--radius-full);font-weight:500;">← Späť do obchodu</a>
                 </div>
 
             </div>

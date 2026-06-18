@@ -14,6 +14,13 @@
     @include('partials.sidebar')
 
     <main class="main-content" id="mainContent">
+        @php
+            $sectionUrls = [
+                'Akcie' => url('/shop/akcie'),
+                'Novinky' => url('/shop/novinky'),
+                'Best sellers' => url('/shop/best-sellers'),
+            ];
+        @endphp
         @foreach ($sections as $section)
             <div class="carousel-section">
                 <h3 class="carousel-header">{{ $section }}</h3>
@@ -22,7 +29,7 @@
                     <div class="carousel-view">
                         <div class="carousel-content">
                             @foreach ($productsBySection[$section] as $product)
-                                <a href="{{ route('product.show', ['id' => $product->id]) }}" class="product-card text-decoration-none text-dark">
+                                <a href="{{ route('product.show', ['id' => $product->id]) }}?from_label={{ urlencode($section) }}&from_url={{ urlencode($sectionUrls[$section] ?? url('/shop')) }}" class="product-card text-decoration-none text-dark">
                                     <div class="product-image">
                                         <img src="{{ asset('Pictures/' . $product->images->first()->filename) }}" alt="{{ $product->name }}">
                                     </div>
