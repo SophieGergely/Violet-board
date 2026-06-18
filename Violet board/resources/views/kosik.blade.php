@@ -101,7 +101,7 @@
                         Vybrať spôsob doručenia
                     </button>
                     <a href="/shop" class="btn w-100 mt-2" style="background:var(--color-primary-light);color:var(--color-primary);border-radius:var(--radius-full);font-weight:500;">
-                        ← Späť nakupovať
+                        ← Späť do obchodu
                     </a>
                 </div>
             </div>

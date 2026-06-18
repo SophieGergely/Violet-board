@@ -46,14 +46,66 @@
 
     <main class="main-content" id="mainContent">
 
+        @php
+            $isBaseShop = ($categoryTitle ?? 'Shop') === 'Shop';
+            $breadcrumbItems = [['label' => 'Domov', 'url' => url('/')]];
+            if ($isBaseShop) {
+                $breadcrumbItems[] = ['label' => 'Shop'];
+            } else {
+                $breadcrumbItems[] = ['label' => 'Shop', 'url' => url('/shop')];
+                $breadcrumbItems[] = ['label' => $categoryTitle];
+            }
+        @endphp
+        @include('partials.breadcrumb', ['items' => $breadcrumbItems, 'extraClass' => 'page-breadcrumb--clear-toggle'])
+
         <div class="category-title">{{ $categoryTitle ?? 'Shop' }}</div>
 
         {{-- Sort & Filter --}}
+        @php
+            $sortLabels = [
+                'asc' => 'Názov A–Z',
+                'desc' => 'Názov Z–A',
+                'price_asc' => 'Cena vzostupne',
+                'price_desc' => 'Cena zostupne',
+            ];
+            $currentSortLabel = $sortLabels[$sort ?? null] ?? null;
+
+            $priceBounds = \App\Models\Product::selectRaw(
+                'MIN(CASE WHEN is_discounted = true AND discounted_price IS NOT NULL THEN discounted_price ELSE price END) as min_price,
+                 MAX(CASE WHEN is_discounted = true AND discounted_price IS NOT NULL THEN discounted_price ELSE price END) as max_price'
+            )->first();
+            $priceBoundsMin = (int) floor($priceBounds->min_price ?? 0);
+            $priceBoundsMax = (int) ceil($priceBounds->max_price ?? 100);
+            $selectedMinPrice = (int) request('min_price', $priceBoundsMin);
+            $selectedMaxPrice = (int) request('max_price', $priceBoundsMax);
+
+            $activeFilterLabels = [];
+            if ($selectedMinPrice > $priceBoundsMin || $selectedMaxPrice < $priceBoundsMax) {
+                $activeFilterLabels[] = 'Cena ' . $selectedMinPrice . '–' . $selectedMaxPrice . ' €';
+            }
+            if (request()->filled('vekova_kategoria')) {
+                $activeFilterLabels[] = 'Vek ≤ ' . request('vekova_kategoria');
+            }
+            if (request()->filled('hracov')) {
+                $activeFilterLabels[] = 'Hráči ≥ ' . request('hracov');
+            }
+            $hasActiveFilters = count($activeFilterLabels) > 0;
+            $filterSummary = implode(', ', $activeFilterLabels);
+            $clearFiltersUrl = url()->current() . '?' . http_build_query(
+                request()->except(['min_price', 'max_price', 'vekova_kategoria', 'hracov'])
+            );
+        @endphp
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
-                <button id="sortBtn" data-dropdown-toggle="sortMenu"
-                    class="btn btn-outline-secondary dropdown-toggle">
-                    Zoradiť
+                <button id="sortBtn" type="button" data-dropdown-toggle="sortMenu" class="filter-pill">
+                    @if ($currentSortLabel)
+                        Zoradenie: {{ $currentSortLabel }}
+                    @else
+                        Zoradenie
+                    @endif
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/>
+                    </svg>
                 </button>
                 <div id="sortMenu" class="z-10 hidden bg-white rounded-lg shadow-lg w-44" style="z-index:300">
                     <ul class="py-2 text-sm">
@@ -66,26 +118,87 @@
             </div>
 
             <div>
-                <button id="filterBtn" data-dropdown-toggle="filterMenu"
-                    class="btn btn-outline-secondary dropdown-toggle">
-                    Filter
-                </button>
+                <div class="filter-pill-group {{ $hasActiveFilters ? 'has-active' : '' }}">
+                    <button id="filterBtn" type="button" data-dropdown-toggle="filterMenu" class="filter-pill-trigger">
+                        @if ($hasActiveFilters)
+                            Filter: {{ $filterSummary }}
+                        @else
+                            Filter
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9 6 6 6-6"/>
+                            </svg>
+                        @endif
+                    </button>
+                    @if ($hasActiveFilters)
+                        <a href="{{ $clearFiltersUrl }}" class="filter-pill-clear" title="Zrušiť filter" aria-label="Zrušiť filter">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/>
+                            </svg>
+                        </a>
+                    @endif
+                </div>
                 <div id="filterMenu" class="z-10 hidden bg-white rounded-lg shadow-lg p-4" style="min-width:260px;z-index:300">
                     <form method="GET" action="{{ url()->current() }}">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Cena od:</label>
-                            <input type="number" step="0.01" class="form-control" name="min_price" value="{{ request('min_price') }}">
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Cena</span>
+                                <span class="d-flex align-items-center gap-2">
+                                    <span id="priceRangeDisplay">{{ $selectedMinPrice }} € – {{ $selectedMaxPrice }} €</span>
+                                    <button type="button" class="filter-field-clear" data-clear="price" title="Obnoviť celý rozsah" aria-label="Obnoviť celý rozsah cien">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </span>
+                            </label>
+                            <div class="price-range-slider" data-min="{{ $priceBoundsMin }}" data-max="{{ $priceBoundsMax }}">
+                                <div class="price-range-track"></div>
+                                <input
+                                    type="range"
+                                    class="price-range-input price-range-input-min"
+                                    min="{{ $priceBoundsMin }}"
+                                    max="{{ $priceBoundsMax }}"
+                                    step="1"
+                                    value="{{ $selectedMinPrice }}"
+                                    aria-label="Minimálna cena"
+                                >
+                                <input
+                                    type="range"
+                                    class="price-range-input price-range-input-max"
+                                    min="{{ $priceBoundsMin }}"
+                                    max="{{ $priceBoundsMax }}"
+                                    step="1"
+                                    value="{{ $selectedMaxPrice }}"
+                                    aria-label="Maximálna cena"
+                                >
+                            </div>
+                            <div class="d-flex justify-content-between" style="color:var(--color-text-muted);font-size:var(--text-xs);">
+                                <span>{{ $priceBoundsMin }} €</span>
+                                <span>{{ $priceBoundsMax }} €</span>
+                            </div>
+                            <input type="hidden" name="min_price" id="minPriceHidden" value="{{ $selectedMinPrice }}">
+                            <input type="hidden" name="max_price" id="maxPriceHidden" value="{{ $selectedMaxPrice }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Cena do:</label>
-                            <input type="number" step="0.01" class="form-control" name="max_price" value="{{ request('max_price') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Max. veková kategória:</label>
+                            <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Max. veková kategória</span>
+                                <button type="button" class="filter-field-clear" data-clear-input="vekova_kategoria" title="Zrušiť" aria-label="Zrušiť vekové obmedzenie">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </label>
                             <input type="number" class="form-control" name="vekova_kategoria" value="{{ request('vekova_kategoria') }}" min="0">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-semibold">Min. počet hráčov:</label>
+                            <label class="form-label fw-semibold d-flex justify-content-between align-items-center">
+                                <span>Min. počet hráčov</span>
+                                <button type="button" class="filter-field-clear" data-clear-input="hracov" title="Zrušiť" aria-label="Zrušiť obmedzenie počtu hráčov">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M6 18 18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </label>
                             <input type="number" class="form-control" name="hracov" value="{{ request('hracov') }}" min="0">
                         </div>
                         <input type="hidden" name="sort" value="{{ request('sort') }}">
@@ -165,6 +278,7 @@
     @include('partials.footer')
 
     <script src="{{ asset('js/sidebar-toggle.js') }}"></script>
+    <script src="{{ asset('js/price-range.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

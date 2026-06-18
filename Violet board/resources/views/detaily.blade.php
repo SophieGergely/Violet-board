@@ -19,6 +19,14 @@
 <body>
     @include('partials.header')
 
+    <div class="container" style="padding-top: 16px;">
+        @include('partials.breadcrumb', ['items' => [
+            ['label' => 'Domov', 'url' => url('/')],
+            ['label' => 'Shop', 'url' => url('/shop')],
+            ['label' => $product->name],
+        ]])
+    </div>
+
     <div class="container product-container">
         <div class="row align-items-center">
             <div class="col-md-6 d-flex justify-content-center align-items-center">

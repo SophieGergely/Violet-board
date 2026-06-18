@@ -1112,6 +1112,56 @@ select:focus {
 }
 
 /* ── Kategória oldal title ────────────────────────────────── */
+/* ── Page breadcrumb (shop + product detail) ──────────────── */
+.page-breadcrumb {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 0 0 12px;
+
+    font-family: var(--font-body);
+
+    font-size: var(--text-sm);
+
+    color: var(--color-text-muted);
+}
+
+.page-breadcrumb a {
+
+    color: var(--color-text-muted);
+
+    text-decoration: none;
+}
+
+.page-breadcrumb a:hover {
+
+    color: var(--color-primary);
+
+    text-decoration: underline;
+}
+
+.page-breadcrumb-sep {
+
+    color: var(--color-border);
+}
+
+.page-breadcrumb-current {
+
+    color: var(--color-primary-dark);
+
+    font-weight: 600;
+}
+
+/* Extra top clearance so the breadcrumb doesn't sit under the fixed
+   sidebar arrow-tab (desktop) / hamburger (mobile) toggle, which both
+   float at roughly navbar-height + 12px to +56px. */
+.page-breadcrumb--clear-toggle {
+
+    margin-top: 44px;
+}
+
 .category-title {
 
     font-family: var(--font-body);
@@ -1162,6 +1212,295 @@ select:focus {
     border-color: #4B5563 !important;
 
     box-shadow: none !important;
+}
+
+/* ── Sort / filter status pills (show what's currently applied) ── */
+.filter-pill {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    height: 40px;
+
+    padding: 0 16px;
+
+    background: var(--color-teal-light);
+
+    color: var(--color-teal-dark);
+
+    border: none;
+
+    border-radius: var(--radius-full);
+
+    font-family: var(--font-body);
+
+    font-weight: 500;
+
+    font-size: var(--text-sm);
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.filter-pill:hover,
+.filter-pill[aria-expanded="true"] {
+
+    background: var(--color-teal);
+
+    color: #ffffff;
+}
+
+.filter-pill-group {
+
+    display: inline-flex;
+    align-items: stretch;
+
+    border-radius: var(--radius-full);
+
+    overflow: hidden;
+}
+
+.filter-pill-trigger {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    height: 40px;
+
+    padding: 0 16px;
+
+    background: var(--color-teal-light);
+
+    color: var(--color-teal-dark);
+
+    border: none;
+
+    border-radius: var(--radius-full);
+
+    font-family: var(--font-body);
+
+    font-weight: 500;
+
+    font-size: var(--text-sm);
+
+    cursor: pointer;
+
+    max-width: 220px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition: .2s ease;
+}
+
+.filter-pill-group.has-active .filter-pill-trigger {
+
+    border-radius: var(--radius-full) 0 0 var(--radius-full);
+
+    padding-right: 10px;
+}
+
+.filter-pill-trigger:hover,
+.filter-pill-trigger[aria-expanded="true"] {
+
+    background: var(--color-teal);
+
+    color: #ffffff;
+}
+
+.filter-pill-clear {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+
+    background: var(--color-teal-light);
+
+    color: var(--color-teal-dark);
+
+    border-left: 1px solid rgba(0,0,0,0.06);
+
+    border-radius: 0 var(--radius-full) var(--radius-full) 0;
+
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+.filter-pill-clear:hover {
+
+    background: var(--color-danger);
+
+    color: #ffffff;
+}
+
+/* ── Price range slider (two overlapping native inputs) ──── */
+.price-range-slider {
+
+    position: relative;
+
+    height: 36px;
+
+    margin: 8px 2px 2px;
+}
+
+.price-range-track {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background: var(--color-teal);
+
+    border-radius: var(--radius-full);
+
+    transform: translateY(-50%);
+
+    z-index: 1;
+}
+
+.price-range-input {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 36px;
+
+    margin: 0;
+
+    background: transparent;
+
+    -webkit-appearance: none;
+    appearance: none;
+
+    accent-color: var(--color-primary);
+
+    outline: none;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.price-range-input:focus {
+    outline: none;
+}
+
+.price-range-input::-webkit-slider-runnable-track {
+    background: none;
+    border: none;
+    box-shadow: none;
+    height: 4px;
+}
+
+.price-range-input::-moz-range-track {
+    background: none;
+    border: none;
+    box-shadow: none;
+    height: 4px;
+}
+
+.price-range-input::-moz-range-progress {
+    background: none;
+}
+
+.price-range-input::-webkit-slider-thumb {
+
+    -webkit-appearance: none;
+
+    pointer-events: auto;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background-color: var(--color-primary) !important;
+
+    border: 2px solid #ffffff;
+
+    box-shadow: var(--shadow-sm);
+
+    cursor: pointer;
+
+    outline: none;
+
+    margin-top: -7px;
+}
+
+.price-range-input::-moz-range-thumb {
+
+    pointer-events: auto;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background-color: var(--color-primary) !important;
+
+    border: 2px solid #ffffff;
+
+    box-shadow: var(--shadow-sm);
+
+    cursor: pointer;
+
+    outline: none;
+}
+
+.price-range-input-max {
+    z-index: 4;
+}
+
+.price-range-input-min {
+    z-index: 3;
+}
+
+.filter-field-clear {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    color: var(--color-text-muted);
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    transition: .2s ease;
+}
+
+.filter-field-clear:hover {
+
+    color: #ffffff;
+
+    background: var(--color-danger);
 }
 
 .dropdown-menu {
