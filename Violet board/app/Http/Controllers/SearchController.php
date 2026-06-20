@@ -17,6 +17,18 @@ class SearchController extends Controller
 
 
 
+    // Shared accent-insensitive name matching, used by both the full
+    // results page (index) and the live suggestion dropdown (suggest).
+    private function matchingProducts(string $normalizedQuery)
+    {
+        return Product::with('images')->get()->filter(function ($product) use ($normalizedQuery) {
+            $normalizedName = strtolower($this->removeAccents($product->name));
+            return str_contains($normalizedName, $normalizedQuery);
+        })->values();
+    }
+
+
+
     public function index(Request $request)
     {
         $query = $request->input('query');
@@ -24,19 +36,11 @@ class SearchController extends Controller
 
         $sort = $request->query('sort', 'asc');
 
-        $productsCollection = Product::with('images')->get()->filter(function ($product) use ($normalizedQuery) {
-            $normalizedName = strtolower($this->removeAccents($product->name));
-
-            $effectivePrice = $product->is_discounted && $product->discounted_price
+        $productsCollection = $this->matchingProducts($normalizedQuery)->map(function ($product) {
+            $product->effective_price = $product->is_discounted && $product->discounted_price
                 ? $product->discounted_price
                 : $product->price;
-
-            if (!str_contains($normalizedName, $normalizedQuery)) {
-                return false;
-            }
-
-            $product->effective_price = $effectivePrice;
-            return true;
+            return $product;
         });
 
         if ($sort === 'price_asc') {
@@ -68,5 +72,41 @@ class SearchController extends Controller
             'categoryTitle' => $categoryTitle,
             'sort' => $sort,
         ]);
+    }
+
+
+
+    // Lightweight JSON endpoint for the live "as you type" search
+    // suggestions dropdown in the header search bar.
+    public function suggest(Request $request)
+    {
+        $query = trim((string) $request->input('query', ''));
+
+        if ($query === '') {
+            return response()->json([]);
+        }
+
+        $normalizedQuery = strtolower($this->removeAccents($query));
+
+        $results = $this->matchingProducts($normalizedQuery)
+            ->take(8)
+            ->map(function ($product) {
+                $effectivePrice = $product->is_discounted && $product->discounted_price
+                    ? $product->discounted_price
+                    : $product->price;
+
+                $image = $product->images->first();
+
+                return [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => number_format($effectivePrice, 2),
+                    'image' => $image ? asset('Pictures/' . $image->filename) : null,
+                    'url' => route('product.show', $product->id),
+                ];
+            })
+            ->values();
+
+        return response()->json($results);
     }
 }

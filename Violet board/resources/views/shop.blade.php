@@ -61,19 +61,6 @@
 
         <div class="category-title">{{ $categoryTitle ?? 'Shop' }}</div>
 
-        @if (request()->is('search'))
-            <div class="text-center mb-3">
-                <a href="{{ url('/shop') }}" class="search-clear-pill">
-                    Zrušiť vyhľadávanie
-                    <span class="search-clear-pill-x">
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2.5" d="M6 18 18 6M6 6l12 12"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
-        @endif
-
         {{-- Sort & Filter --}}
         @php
             $sortLabels = [
@@ -283,26 +270,65 @@
                 </div>
             @empty
                 <div class="col-12 text-center py-5">
-                    <div style="margin-bottom:16px; display:flex; justify-content:center;">
-                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 56l-3.6-3.3C14 39.6 4 30.8 4 20
-                                     4 11.2 11.2 4 20 4c4.8 0 9.4 2.2 12 5.6
-                                     C34.6 6.2 39.2 4 44 4 52.8 4 60 11.2 60 20
-                                     c0 10.8-10 19.6-24.4 32.7L32 56z"
-                                  fill="#6D28D9" stroke="#6D28D9" stroke-width="3.5" stroke-linejoin="round"/>
-                        </svg>
+                    <div class="empty-state-card">
+                        @if (request()->is('search'))
+                            {{-- Nincs keresési eredmény --}}
+                            <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="27" cy="27" r="18" stroke="#6D28D9" stroke-width="3.5"/>
+                                    <line x1="40" y1="40" x2="56" y2="56" stroke="#6D28D9" stroke-width="3.5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
+                                Žiadny produkt sa nenašiel
+                            </h4>
+                            <p style="color:var(--color-text-muted);margin-bottom:24px">
+                                @if (request()->filled('query'))
+                                    Pre výraz „{{ request('query') }}“ sme nenašli žiadny produkt.
+                                @else
+                                    Skúste zadať iný výraz alebo si pozrite celú ponuku.
+                                @endif
+                            </p>
+                            <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
+                        @elseif (request()->is('shop/oblubene'))
+                            {{-- Nincsenek kedvenc termékek --}}
+                            <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32 56l-3.6-3.3C14 39.6 4 30.8 4 20
+                                             4 11.2 11.2 4 20 4c4.8 0 9.4 2.2 12 5.6
+                                             C34.6 6.2 39.2 4 44 4 52.8 4 60 11.2 60 20
+                                             c0 10.8-10 19.6-24.4 32.7L32 56z"
+                                          fill="#6D28D9" stroke="#6D28D9" stroke-width="3.5" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
+                                Zatiaľ žiadne obľúbené produkty
+                            </h4>
+                            <p style="color:var(--color-text-muted);margin-bottom:24px">
+                                Pridajte si produkty medzi obľúbené kliknutím na
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#DC2626" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin: 0 1px;">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                                pri produkte.
+                            </p>
+                            <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
+                        @else
+                            {{-- Nincs termék az adott kategóriában / szűrésnél --}}
+                            <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 22l24-12 24 12-24 12-24-12z" stroke="#6D28D9" stroke-width="3.5" stroke-linejoin="round"/>
+                                    <path d="M8 22v20l24 12V34M56 22v20L32 54" stroke="#6D28D9" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
+                                Žiadne produkty
+                            </h4>
+                            <p style="color:var(--color-text-muted);margin-bottom:24px">
+                                V tejto kategórii sa momentálne nenachádzajú žiadne produkty.
+                            </p>
+                            <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
+                        @endif
                     </div>
-                    <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
-                        Zatiaľ žiadne obľúbené produkty
-                    </h4>
-                    <p style="color:var(--color-text-muted);margin-bottom:24px">
-                        Pridajte si produkty medzi obľúbené kliknutím na
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#DC2626" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin: 0 1px;">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                        pri produkte.
-                    </p>
-                    <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
                 </div>
             @endforelse
         </div>

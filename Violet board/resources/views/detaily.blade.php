@@ -48,7 +48,7 @@
                                     alt="{{ $product->name }}"
                                     data-basename="{{ $slug }}"
                                     data-imagefolder="{{ asset('Pictures') . '/' }}"
-                                    style="width: 100%; height: 100%; object-fit: contain; cursor: zoom-in;"
+                                    style="max-width: 100%; max-height: 100%; display: block; border-radius: 16px; cursor: zoom-in;"
                                     onclick="openImageLightbox()">
                             </div>
                             <button class="arrow-section position-absolute top-50 end-0 translate-middle-y" style="z-index:10; margin-right: 8px;" onclick="changeImage(1)">&#9654;</button>

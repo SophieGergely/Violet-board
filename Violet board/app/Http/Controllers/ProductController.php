@@ -160,6 +160,7 @@ class ProductController extends Controller
             return response()->json([
                 'quantity' => $finalCart[$id]['quantity'] ?? 1,
                 'cart_count' => collect($finalCart)->sum('quantity'),
+                'cart_preview_html' => view('partials.cart-preview')->render(),
             ]);
         }
 
@@ -239,6 +240,7 @@ class ProductController extends Controller
                 'item_total_html' => $itemTotalHtml,
                 'cart_total' => number_format(collect($cart)->sum(fn($i) => $i['price'] * $i['quantity']), 2),
                 'cart_count' => collect($cart)->sum('quantity'),
+                'cart_preview_html' => view('partials.cart-preview')->render(),
             ]);
         }
 

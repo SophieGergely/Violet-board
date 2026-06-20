@@ -57,4 +57,5 @@ Route::post('/logout', function () {
 Route::delete('/profil/zmazat', [AuthController::class, 'destroy'])->middleware('auth')->name('profil.zmazat');
 
 // -- Search --
+Route::get('/search/suggest', [App\Http\Controllers\SearchController::class, 'suggest'])->name('search.suggest');
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');

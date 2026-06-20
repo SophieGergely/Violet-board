@@ -9,8 +9,30 @@
                 </svg>
             </a>
 
-            <form action="{{ route('search') }}" method="GET" class="d-flex">
-                <input type="text" name="query" class="search-bar" placeholder="Zadajte, čo hľadáte...">
+            <form action="{{ route('search') }}" method="GET" class="search-form-wrap">
+                <input
+                    type="text"
+                    name="query"
+                    id="searchInput"
+                    class="search-bar"
+                    placeholder="Zadajte, čo hľadáte..."
+                    value="{{ request('query') }}"
+                    autocomplete="off"
+                >
+                <button
+                    type="button"
+                    id="searchClearBtn"
+                    class="search-clear-btn"
+                    title="Zrušiť vyhľadávanie"
+                    aria-label="Zrušiť vyhľadávanie"
+                    style="display: {{ request()->filled('query') ? 'flex' : 'none' }};"
+                >
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2.5" d="M6 18 18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <div id="searchSuggestions" class="search-suggestions"></div>
             </form>
         </div>
 
@@ -65,11 +87,17 @@
                     </svg>
                 </a>
 
-                <a href="/kosik" class="navbar-icon-btn" title="Košík">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.83 14l.94-2h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L20.1 3H4.21L3.27 1H0v2h2l3.6 7.59L4.25 13c-.16.28-.25.61-.25.95C4 15.1 4.9 16 6 16h14v-2H6.42c-.14 0-.25-.11-.25-.25l.03-.14.55-1.61z"/>
-                    </svg>
-                </a>
+                <div class="navbar-cart-wrap">
+                    <a href="/kosik" class="navbar-icon-btn" title="Košík">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.83 14l.94-2h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L20.1 3H4.21L3.27 1H0v2h2l3.6 7.59L4.25 13c-.16.28-.25.61-.25.95C4 15.1 4.9 16 6 16h14v-2H6.42c-.14 0-.25-.11-.25-.25l.03-.14.55-1.61z"/>
+                        </svg>
+                    </a>
+
+                    <div class="navbar-cart-preview">
+                        @include('partials.cart-preview', ['headerCart' => session('cart', [])])
+                    </div>
+                </div>
             </div>
 
             {{-- Mobilon: fiók + kosár + hamburger --}}
@@ -177,4 +205,123 @@
             }
         });
     });
+
+    // Search input clear (×) button: shows whenever the field has text,
+    // hides it. On the search results page it also cancels the search
+    // entirely by navigating back to /shop.
+    (function () {
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('searchClearBtn');
+        if (!searchInput || !clearBtn) return;
+
+        const isSearchPage = {{ request()->is('search') ? 'true' : 'false' }};
+
+        function updateClearVisibility() {
+            clearBtn.style.display = searchInput.value.length > 0 ? 'flex' : 'none';
+        }
+
+        searchInput.addEventListener('input', updateClearVisibility);
+
+        clearBtn.addEventListener('click', function () {
+            if (isSearchPage) {
+                window.location.href = '/shop';
+                return;
+            }
+            searchInput.value = '';
+            searchInput.focus();
+            updateClearVisibility();
+        });
+    })();
+
+    // Live "as you type" search suggestions: debounced fetch against
+    // /search/suggest, rendered as a dropdown list under the search bar.
+    (function () {
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsBox = document.getElementById('searchSuggestions');
+        if (!searchInput || !suggestionsBox) return;
+
+        const DEBOUNCE_MS = 250;
+        let debounceTimer = null;
+        let activeController = null;
+
+        function closeSuggestions() {
+            suggestionsBox.innerHTML = '';
+            suggestionsBox.classList.remove('show');
+        }
+
+        function renderSuggestions(items, query) {
+            suggestionsBox.innerHTML = '';
+
+            if (!items.length) {
+                const empty = document.createElement('div');
+                empty.className = 'search-suggestion-empty';
+                empty.textContent = 'Žiadne výsledky pre „' + query + '“';
+                suggestionsBox.appendChild(empty);
+                suggestionsBox.classList.add('show');
+                return;
+            }
+
+            items.forEach(function (item) {
+                const link = document.createElement('a');
+                link.href = item.url;
+                link.className = 'search-suggestion-item';
+
+                const img = document.createElement('img');
+                img.className = 'search-suggestion-image';
+                img.alt = '';
+                if (item.image) img.src = item.image;
+                link.appendChild(img);
+
+                const name = document.createElement('span');
+                name.className = 'search-suggestion-name';
+                name.textContent = item.name;
+                link.appendChild(name);
+
+                const price = document.createElement('span');
+                price.className = 'search-suggestion-price';
+                price.textContent = item.price + ' €';
+                link.appendChild(price);
+
+                suggestionsBox.appendChild(link);
+            });
+
+            suggestionsBox.classList.add('show');
+        }
+
+        searchInput.addEventListener('input', function () {
+            const value = searchInput.value.trim();
+            clearTimeout(debounceTimer);
+
+            if (value.length === 0) {
+                closeSuggestions();
+                return;
+            }
+
+            debounceTimer = setTimeout(function () {
+                if (activeController) activeController.abort();
+                activeController = new AbortController();
+
+                fetch('/search/suggest?query=' + encodeURIComponent(value), { signal: activeController.signal })
+                    .then(function (res) { return res.json(); })
+                    .then(function (items) { renderSuggestions(items, value); })
+                    .catch(function () {});
+            }, DEBOUNCE_MS);
+        });
+
+        searchInput.addEventListener('focus', function () {
+            if (searchInput.value.trim().length > 0 && suggestionsBox.innerHTML !== '') {
+                suggestionsBox.classList.add('show');
+            }
+        });
+
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeSuggestions();
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                closeSuggestions();
+            }
+        });
+    })();
 </script>

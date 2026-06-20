@@ -79,20 +79,22 @@
                     </div>
                 @empty
                     <div class="text-center py-5">
-                        <div style="margin-bottom:16px; display:flex; justify-content:center;">
-                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 8h6l8 28h28l6-20H18" stroke="#6D28D9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                <circle cx="26" cy="52" r="4" fill="#6D28D9"/>
-                                <circle cx="44" cy="52" r="4" fill="#6D28D9"/>
-                            </svg>
+                        <div class="empty-state-card">
+                            <div style="margin-bottom:16px; display:flex; justify-content:center;">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 8h6l8 28h28l6-20H18" stroke="#6D28D9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                    <circle cx="26" cy="52" r="4" fill="#6D28D9"/>
+                                    <circle cx="44" cy="52" r="4" fill="#6D28D9"/>
+                                </svg>
+                            </div>
+                            <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
+                                Váš košík je prázdny
+                            </h4>
+                            <p style="color:var(--color-text-muted);margin-bottom:24px">
+                                Pridajte produkty do košíka a nakupujte u nás.
+                            </p>
+                            <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
                         </div>
-                        <h4 style="color:var(--color-primary);font-weight:600;margin-bottom:8px">
-                            Váš košík je prázdny
-                        </h4>
-                        <p style="color:var(--color-text-muted);margin-bottom:24px">
-                            Pridajte produkty do košíka a nakupujte u nás.
-                        </p>
-                        <a href="/shop" class="btn btn-primary px-5">Prejsť do obchodu</a>
                     </div>
                 @endforelse
             </div>
@@ -117,9 +119,48 @@
         </div>
     </div>
 
+    {{-- Theme-matching popup modal (e.g. for an empty cart) --}}
+    <div id="themedAlert" class="themed-alert" role="alert" onclick="if (event.target === this) closeThemedAlert()">
+        <div class="themed-alert-card">
+            <button type="button" class="themed-alert-close" onclick="closeThemedAlert()" aria-label="Zavrieť">&times;</button>
+            <div class="themed-alert-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="themed-alert-message" id="themedAlertMessage"></div>
+        </div>
+    </div>
+
     @include('partials.footer')
 
     <script>window.cartData = @json(session('cart', []));</script>
+    <script>
+        // Exposes showThemedAlert()/closeThemedAlert() globally so kosik.js
+        // (and any other script on this page) can trigger the themed modal
+        // instead of using the native browser alert().
+        (function () {
+            const themedAlert = document.getElementById('themedAlert');
+            const themedAlertMessage = document.getElementById('themedAlertMessage');
+
+            window.showThemedAlert = function (message) {
+                themedAlertMessage.textContent = message;
+                themedAlert.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            };
+
+            window.closeThemedAlert = function () {
+                themedAlert.classList.remove('show');
+                document.body.style.overflow = '';
+            };
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && themedAlert.classList.contains('show')) {
+                    window.closeThemedAlert();
+                }
+            });
+        })();
+    </script>
     <script src="{{ asset('js/kosik.js') }}"></script>
     <script src="{{ asset('js/cart-ajax.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
