@@ -22,6 +22,10 @@ class Product extends Model
         'min_players',
         'max_players',
         'in_stock',
+        'play_time_min',
+        'play_time_max',
+        'bgg_rating',
+        'weight',
     ];
 
     protected function casts(): array
@@ -29,6 +33,8 @@ class Product extends Model
         return [
             'price'      => 'decimal:2',
             'in_stock'   => 'boolean',
+            'bgg_rating' => 'decimal:2',
+            'weight'     => 'decimal:2',
             'deleted_at' => 'datetime',
         ];
     }
