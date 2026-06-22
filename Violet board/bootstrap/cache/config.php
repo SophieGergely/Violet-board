@@ -137,6 +137,79 @@
     ),
     'password_timeout' => 10800,
   ),
+  'box_collect_locations' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Bratislava - Avion',
+      'city' => 'Bratislava',
+      'street' => 'Ivanská cesta 16',
+      'zip' => '821 04',
+    ),
+    1 => 
+    array (
+      'name' => 'Košice - Aupark',
+      'city' => 'Košice',
+      'street' => 'Námestie osloboditeľov 1',
+      'zip' => '040 01',
+    ),
+    2 => 
+    array (
+      'name' => 'Žilina - OC Mirage',
+      'city' => 'Žilina',
+      'street' => 'Námestie A. Hlinku 7B',
+      'zip' => '010 01',
+    ),
+    3 => 
+    array (
+      'name' => 'Kopčany',
+      'city' => 'Kopčany',
+      'street' => 'Kollárova',
+      'zip' => '908 48',
+    ),
+    4 => 
+    array (
+      'name' => 'Skalica - Farby-Laky',
+      'city' => 'Skalica',
+      'street' => 'Mallého 1218/14',
+      'zip' => '909 01',
+    ),
+    5 => 
+    array (
+      'name' => 'Malacky - Záhorácka',
+      'city' => 'Malacky',
+      'street' => 'Záhorácka 53',
+      'zip' => '901 01',
+    ),
+    6 => 
+    array (
+      'name' => 'Zohor',
+      'city' => 'Zohor',
+      'street' => 'Struhárova ulica 2',
+      'zip' => '900 51',
+    ),
+    7 => 
+    array (
+      'name' => 'Smolenice',
+      'city' => 'Smolenice',
+      'street' => 'Trnavská 584/12',
+      'zip' => '919 04',
+    ),
+    8 => 
+    array (
+      'name' => 'Diakovce',
+      'city' => 'Diakovce',
+      'street' => '459',
+      'zip' => '925 81',
+    ),
+    9 => 
+    array (
+      'name' => 'Komárno',
+      'city' => 'Komárno',
+      'street' => 'Hadovská cesta 3913',
+      'zip' => '945 01',
+    ),
+  ),
   'cache' => 
   array (
     'default' => 'array',

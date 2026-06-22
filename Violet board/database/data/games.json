@@ -1,0 +1,810 @@
+[
+  {
+    "name": "Gloomhaven",
+    "description": "A game of cooperative tactical combat set in a persistent dungeon-crawling world with over 95 unique missions.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.79, "weight": 3.86,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Brass: Birmingham",
+    "description": "Build networks, develop industries, and expand your empire during the industrial revolution in Birmingham.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.65, "weight": 3.91,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Ark Nova",
+    "description": "Plan and design a modern, scientifically managed zoo to support global conservation projects.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 90, "play_time_max": 150,
+    "bgg_rating": 8.60, "weight": 3.72,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Pandemic Legacy: Season 1",
+    "description": "A co-operative campaign game where each decision permanently changes the world you play in.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 75,
+    "bgg_rating": 8.62, "weight": 2.83,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Spirit Island",
+    "description": "Powerful island spirits cooperate to drive away colonizing invaders and protect the native islanders.",
+    "min_players": 1, "max_players": 4, "min_age": 13,
+    "play_time_min": 90, "play_time_max": 120,
+    "bgg_rating": 8.42, "weight": 3.99,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Terraforming Mars",
+    "description": "Corporations compete to terraform Mars by raising temperature, oxygen, and ocean coverage.",
+    "min_players": 1, "max_players": 5, "min_age": 12,
+    "play_time_min": 90, "play_time_max": 120,
+    "bgg_rating": 8.41, "weight": 3.25,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Through the Ages: A New Story of Civilization",
+    "description": "Build the greatest civilization through careful resource management, military strength, and cultural development.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 120, "play_time_max": 240,
+    "bgg_rating": 8.39, "weight": 4.43,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Twilight Imperium (4th Edition)",
+    "description": "An epic game of galactic conquest, politics, and trade where players compete to control the galaxy.",
+    "min_players": 3, "max_players": 6, "min_age": 14,
+    "play_time_min": 240, "play_time_max": 480,
+    "bgg_rating": 8.55, "weight": 4.29,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Scythe",
+    "description": "An alternate-history 1920s game of engine-building and territorial control in Eastern Europe.",
+    "min_players": 1, "max_players": 5, "min_age": 14,
+    "play_time_min": 90, "play_time_max": 115,
+    "bgg_rating": 8.22, "weight": 3.41,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Gaia Project",
+    "description": "Fourteen factions compete to colonize and terraform planets across the galaxy.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 150,
+    "bgg_rating": 8.42, "weight": 4.14,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Dune: Imperium",
+    "description": "Combine deck-building and worker placement in a struggle for the most valuable resource in the universe.",
+    "min_players": 1, "max_players": 4, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.42, "weight": 3.03,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Root",
+    "description": "A game of woodland might and right where asymmetric factions battle for control of a vast wilderness.",
+    "min_players": 2, "max_players": 4, "min_age": 10,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 8.07, "weight": 3.72,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Wingspan",
+    "description": "A competitive bird-collecting engine-building game with over 170 unique North American birds.",
+    "min_players": 1, "max_players": 5, "min_age": 10,
+    "play_time_min": 40, "play_time_max": 70,
+    "bgg_rating": 8.07, "weight": 2.45,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Brass: Lancashire",
+    "description": "The original Brass. Build canals and railways to dominate the industrial revolution in Lancashire.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 8.23, "weight": 3.67,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Twilight Struggle",
+    "description": "Two players relive the Cold War, waging political battles across the globe for 45 years of history.",
+    "min_players": 2, "max_players": 2, "min_age": 13,
+    "play_time_min": 120, "play_time_max": 180,
+    "bgg_rating": 8.31, "weight": 3.59,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Agricola",
+    "description": "Manage a farm in 17th-century Europe. Feed your family and expand your homestead.",
+    "min_players": 1, "max_players": 5, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 150,
+    "bgg_rating": 7.97, "weight": 3.64,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Terra Mystica",
+    "description": "Fourteen factions with unique abilities terraform a landscape to expand their dominion.",
+    "min_players": 2, "max_players": 5, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 150,
+    "bgg_rating": 8.13, "weight": 3.88,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Concordia",
+    "description": "Build a Roman trading empire across the Mediterranean using a hand of action cards.",
+    "min_players": 2, "max_players": 5, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 100,
+    "bgg_rating": 8.18, "weight": 3.03,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Great Western Trail",
+    "description": "Drive your cattle herd from Texas to Kansas City in the most profitable way possible.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 75, "play_time_max": 150,
+    "bgg_rating": 8.21, "weight": 3.71,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Underwater Cities",
+    "description": "Build the most efficient network of underwater cities on the ocean floor.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 80, "play_time_max": 150,
+    "bgg_rating": 8.29, "weight": 3.42,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Barrage",
+    "description": "Compete to build and manage the most powerful hydroelectric dam system in the Alps.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.14, "weight": 3.97,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "On Mars",
+    "description": "Colonize Mars by contributing to the development of the first human settlement on the red planet.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 90, "play_time_max": 160,
+    "bgg_rating": 8.18, "weight": 4.51,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Maracaibo",
+    "description": "Sail the Caribbean Sea during the 17th century while completing quests and building influence.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 30, "play_time_max": 120,
+    "bgg_rating": 8.18, "weight": 3.95,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Clans of Caledonia",
+    "description": "Lead one of Scotland's historical clans during the 19th century transition from agriculture to industry.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 30, "play_time_max": 120,
+    "bgg_rating": 8.17, "weight": 3.41,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Architects of the West Kingdom",
+    "description": "Compete to be the best architect in the service of a monarch during the Carolingian Empire.",
+    "min_players": 1, "max_players": 5, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 80,
+    "bgg_rating": 7.79, "weight": 2.47,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Viticulture: Essential Edition",
+    "description": "Build the most successful winery in Tuscany by planting vines, harvesting grapes, and crafting wine.",
+    "min_players": 1, "max_players": 6, "min_age": 13,
+    "play_time_min": 45, "play_time_max": 90,
+    "bgg_rating": 8.00, "weight": 2.87,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Power Grid",
+    "description": "Supply cities with power using various energy sources while managing a network of infrastructure.",
+    "min_players": 2, "max_players": 6, "min_age": 12,
+    "play_time_min": 120, "play_time_max": 120,
+    "bgg_rating": 7.90, "weight": 3.29,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Puerto Rico",
+    "description": "Build your colonial plantation, produce goods, and ship them to Europe to score victory points.",
+    "min_players": 2, "max_players": 5, "min_age": 12,
+    "play_time_min": 90, "play_time_max": 150,
+    "bgg_rating": 7.97, "weight": 3.29,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Everdell",
+    "description": "Build a city of critters and constructions beneath the Ever Tree in this beautiful engine-builder.",
+    "min_players": 1, "max_players": 4, "min_age": 13,
+    "play_time_min": 40, "play_time_max": 80,
+    "bgg_rating": 8.07, "weight": 2.79,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Cascadia",
+    "description": "Build the most harmonious ecosystem in the Pacific Northwest by placing terrain tiles and wildlife tokens.",
+    "min_players": 1, "max_players": 4, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.93, "weight": 1.85,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Catan",
+    "description": "Collect resources, build roads and settlements, and trade with other players on the island of Catan.",
+    "min_players": 3, "max_players": 4, "min_age": 10,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.16, "weight": 2.32,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Carcassonne",
+    "description": "Place tiles to build medieval landscapes and claim features with your followers.",
+    "min_players": 2, "max_players": 5, "min_age": 7,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.43, "weight": 1.92,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Ticket to Ride",
+    "description": "Build railway routes across North America to connect cities and complete destination tickets.",
+    "min_players": 2, "max_players": 5, "min_age": 8,
+    "play_time_min": 45, "play_time_max": 90,
+    "bgg_rating": 7.54, "weight": 1.97,
+    "categories": ["Family Games"]
+  },
+  {
+    "name": "Pandemic",
+    "description": "Four diseases threaten the world. Work together as a team to find cures before it is too late.",
+    "min_players": 2, "max_players": 4, "min_age": 8,
+    "play_time_min": 45, "play_time_max": 60,
+    "bgg_rating": 7.63, "weight": 2.41,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "7 Wonders",
+    "description": "Lead one of seven great ancient cities and develop your civilization through cards drafted each round.",
+    "min_players": 2, "max_players": 7, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.76, "weight": 2.34,
+    "categories": ["Strategy Games", "Card Games"]
+  },
+  {
+    "name": "Dominion",
+    "description": "The game that launched deck-building. Acquire cards to build the most efficient deck and earn the most victory points.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 30, "play_time_max": 30,
+    "bgg_rating": 7.62, "weight": 2.37,
+    "categories": ["Card Games"]
+  },
+  {
+    "name": "Azul",
+    "description": "Draft colorful tiles to decorate the walls of the Royal Palace of Evora in this abstract strategy game.",
+    "min_players": 2, "max_players": 4, "min_age": 8,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.79, "weight": 1.78,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Splendor",
+    "description": "Collect gems, acquire cards, and attract noble patrons to build the greatest Renaissance gem-trading empire.",
+    "min_players": 2, "max_players": 4, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 30,
+    "bgg_rating": 7.44, "weight": 1.76,
+    "categories": ["Card Games", "Family Games"]
+  },
+  {
+    "name": "7 Wonders Duel",
+    "description": "Two players compete to build the greatest ancient civilization in this card-drafting civilization game.",
+    "min_players": 2, "max_players": 2, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 30,
+    "bgg_rating": 8.12, "weight": 2.21,
+    "categories": ["Strategy Games", "Card Games"]
+  },
+  {
+    "name": "Codenames",
+    "description": "Two rival spymasters know the secret identities of 25 agents. Their teammates know only the codenames.",
+    "min_players": 2, "max_players": 8, "min_age": 14,
+    "play_time_min": 15, "play_time_max": 15,
+    "bgg_rating": 7.83, "weight": 1.25,
+    "categories": ["Party Games"]
+  },
+  {
+    "name": "Patchwork",
+    "description": "Two players compete to build the most aesthetic quilt by fitting oddly shaped patches together.",
+    "min_players": 2, "max_players": 2, "min_age": 8,
+    "play_time_min": 15, "play_time_max": 30,
+    "bgg_rating": 7.80, "weight": 1.71,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Dixit",
+    "description": "Use beautifully illustrated cards and creative storytelling to give clues that are not too obvious nor too cryptic.",
+    "min_players": 3, "max_players": 8, "min_age": 8,
+    "play_time_min": 30, "play_time_max": 30,
+    "bgg_rating": 7.25, "weight": 1.15,
+    "categories": ["Party Games", "Family Games"]
+  },
+  {
+    "name": "Camel Up",
+    "description": "Bet on crazy camels stacking on each other and racing around a pyramid in the Egyptian desert.",
+    "min_players": 3, "max_players": 8, "min_age": 8,
+    "play_time_min": 20, "play_time_max": 30,
+    "bgg_rating": 7.05, "weight": 1.48,
+    "categories": ["Family Games", "Party Games"]
+  },
+  {
+    "name": "Sushi Go!",
+    "description": "Pass cards around the table and grab the best sushi dishes as they whiz by in this drafting game.",
+    "min_players": 2, "max_players": 5, "min_age": 8,
+    "play_time_min": 15, "play_time_max": 20,
+    "bgg_rating": 7.28, "weight": 1.18,
+    "categories": ["Card Games", "Family Games"]
+  },
+  {
+    "name": "Hanabi",
+    "description": "A cooperative card game where players hold cards facing outward and must give each other hints.",
+    "min_players": 2, "max_players": 5, "min_age": 8,
+    "play_time_min": 25, "play_time_max": 25,
+    "bgg_rating": 6.97, "weight": 1.73,
+    "categories": ["Card Games", "Family Games"]
+  },
+  {
+    "name": "Forbidden Island",
+    "description": "Work together as a team of adventurers to capture four sacred treasures before the island sinks.",
+    "min_players": 2, "max_players": 4, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 30,
+    "bgg_rating": 6.88, "weight": 1.73,
+    "categories": ["Family Games"]
+  },
+  {
+    "name": "One Night Ultimate Werewolf",
+    "description": "In this fast game, each player takes on a secret role and tries to figure out who the werewolf is.",
+    "min_players": 3, "max_players": 10, "min_age": 8,
+    "play_time_min": 10, "play_time_max": 10,
+    "bgg_rating": 7.27, "weight": 1.21,
+    "categories": ["Party Games"]
+  },
+  {
+    "name": "Citadels",
+    "description": "Use your characters' special abilities to build the most glorious city while thwarting your rivals.",
+    "min_players": 2, "max_players": 7, "min_age": 10,
+    "play_time_min": 60, "play_time_max": 60,
+    "bgg_rating": 7.21, "weight": 1.78,
+    "categories": ["Card Games"]
+  },
+  {
+    "name": "Coup",
+    "description": "Bluff your way to victory by eliminating all other players in this fast-paced social deduction card game.",
+    "min_players": 2, "max_players": 6, "min_age": 10,
+    "play_time_min": 15, "play_time_max": 15,
+    "bgg_rating": 7.72, "weight": 1.49,
+    "categories": ["Party Games", "Card Games"]
+  },
+  {
+    "name": "Alchemists",
+    "description": "Deduce the hidden properties of magical ingredients and publish your research before rivals discredit you.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 90, "play_time_max": 120,
+    "bgg_rating": 7.79, "weight": 3.55,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Keyflower",
+    "description": "Bid workers to claim tiles and build your village across four seasons in this unique auction game.",
+    "min_players": 2, "max_players": 6, "min_age": 12,
+    "play_time_min": 90, "play_time_max": 150,
+    "bgg_rating": 7.86, "weight": 3.78,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Food Chain Magnate",
+    "description": "Build a fast food empire from scratch in this highly strategic game of corporate competition.",
+    "min_players": 2, "max_players": 5, "min_age": 14,
+    "play_time_min": 120, "play_time_max": 240,
+    "bgg_rating": 8.21, "weight": 4.20,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Mage Knight",
+    "description": "Explore a land of ancient runes, creatures, and powers in this epic solo or cooperative adventure.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 240,
+    "bgg_rating": 8.15, "weight": 4.28,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Robinson Crusoe",
+    "description": "Survive on a deserted island by building shelter, finding food, and fending off dangers.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 7.87, "weight": 3.55,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Eldritch Horror",
+    "description": "Investigators travel the globe to gather clues and close gates in this Lovecraftian adventure.",
+    "min_players": 1, "max_players": 8, "min_age": 14,
+    "play_time_min": 120, "play_time_max": 240,
+    "bgg_rating": 7.97, "weight": 3.04,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Cosmic Encounter",
+    "description": "Build a galactic empire by establishing colonies on other players' planets using alien powers.",
+    "min_players": 3, "max_players": 5, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.28, "weight": 2.44,
+    "categories": ["Strategy Games", "Party Games"]
+  },
+  {
+    "name": "Caverna: The Cave Farmers",
+    "description": "Dwarves mine and farm in a mountain cave, building rooms and raising animals to prosper.",
+    "min_players": 1, "max_players": 7, "min_age": 12,
+    "play_time_min": 30, "play_time_max": 210,
+    "bgg_rating": 7.93, "weight": 3.71,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Ora et Labora",
+    "description": "Run a monastery in medieval Europe, producing goods and constructing buildings over centuries.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 180,
+    "bgg_rating": 7.80, "weight": 3.77,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Nusfjord",
+    "description": "Run a fishing company in a small Norwegian village, developing your fleet and the local community.",
+    "min_players": 1, "max_players": 5, "min_age": 13,
+    "play_time_min": 20, "play_time_max": 100,
+    "bgg_rating": 7.73, "weight": 2.96,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Lorenzo il Magnifico",
+    "description": "Lead a noble family in Renaissance Florence, acquiring resources and gaining prestige.",
+    "min_players": 2, "max_players": 4, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.83, "weight": 3.37,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Res Arcana",
+    "description": "Draft magical artifacts and use essence to power them in this streamlined engine-building card game.",
+    "min_players": 2, "max_players": 4, "min_age": 12,
+    "play_time_min": 20, "play_time_max": 60,
+    "bgg_rating": 7.60, "weight": 2.21,
+    "categories": ["Card Games", "Strategy Games"]
+  },
+  {
+    "name": "Sleeping Gods",
+    "description": "Captain a steamship lost in a strange world, exploring an atlas and discovering dozens of quests.",
+    "min_players": 1, "max_players": 4, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.08, "weight": 2.91,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Heat: Pedal to the Metal",
+    "description": "Race vintage cars at breakneck speeds using hand management and engine-building mechanics.",
+    "min_players": 1, "max_players": 6, "min_age": 10,
+    "play_time_min": 30, "play_time_max": 60,
+    "bgg_rating": 8.00, "weight": 2.38,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Sky Team",
+    "description": "Two players fly as a pilot and co-pilot team and must land their aircraft through silent cooperation.",
+    "min_players": 2, "max_players": 2, "min_age": 12,
+    "play_time_min": 15, "play_time_max": 15,
+    "bgg_rating": 8.12, "weight": 1.57,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Beyond the Sun",
+    "description": "Civilizations of the future compete to colonize new worlds and advance their technology.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.94, "weight": 3.50,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Foundations of Rome",
+    "description": "Acquire plots and erect grand buildings to shape the Eternal City into a glorious metropolis.",
+    "min_players": 2, "max_players": 5, "min_age": 14,
+    "play_time_min": 45, "play_time_max": 120,
+    "bgg_rating": 7.74, "weight": 2.72,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Revive",
+    "description": "Rebuild humanity after an ice age by exploring a frozen world and restarting ancient machines.",
+    "min_players": 1, "max_players": 4, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 8.03, "weight": 3.09,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Gloomhaven: Jaws of the Lion",
+    "description": "A standalone entry into the Gloomhaven universe designed to be more accessible for new players.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 8.59, "weight": 3.54,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Pandemic Legacy: Season 2",
+    "description": "Continue the story of Pandemic Legacy in a desperate fight to save a world already ravaged by disease.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 75,
+    "bgg_rating": 8.25, "weight": 2.87,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Pandemic Legacy: Season 0",
+    "description": "Prequel to Pandemic Legacy. Play as CIA operatives trying to prevent a global bio-terrorism attack.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 45, "play_time_max": 75,
+    "bgg_rating": 8.35, "weight": 2.93,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Suburbia",
+    "description": "Build a borough of a major city by playing hex tiles representing commercial, residential, and civic areas.",
+    "min_players": 1, "max_players": 4, "min_age": 8,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.41, "weight": 2.74,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Lords of Waterdeep",
+    "description": "Recruit adventurers and send them on quests to increase your power in the Forgotten Realms city of Waterdeep.",
+    "min_players": 2, "max_players": 5, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.73, "weight": 2.48,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Tzolk'in: The Mayan Calendar",
+    "description": "Place workers on interlocking gears that turn each round, creating unique timing decisions.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 90, "play_time_max": 90,
+    "bgg_rating": 7.87, "weight": 3.67,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Mysterium",
+    "description": "One player is a ghost sending cryptic visions to psychic investigators trying to solve a murder mystery.",
+    "min_players": 2, "max_players": 7, "min_age": 10,
+    "play_time_min": 42, "play_time_max": 42,
+    "bgg_rating": 7.24, "weight": 1.68,
+    "categories": ["Family Games", "Party Games"]
+  },
+  {
+    "name": "Aeon's End",
+    "description": "Cooperatively defend the last city of Gravehold from devastating breaches and powerful nemeses.",
+    "min_players": 1, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 60,
+    "bgg_rating": 7.80, "weight": 2.52,
+    "categories": ["Card Games", "Strategy Games"]
+  },
+  {
+    "name": "Azul: Stained Glass of Sintra",
+    "description": "Create the most beautiful stained glass windows for the Palace of Sintra in this sequel to Azul.",
+    "min_players": 2, "max_players": 4, "min_age": 8,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.45, "weight": 1.86,
+    "categories": ["Family Games"]
+  },
+  {
+    "name": "Clank! In! Space!",
+    "description": "Sneak through a spaceship, steal artifacts, and escape before the alarm triggers in this deck-builder.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 45, "play_time_max": 90,
+    "bgg_rating": 7.68, "weight": 2.33,
+    "categories": ["Strategy Games", "Card Games"]
+  },
+  {
+    "name": "Pandemic: Reign of Cthulhu",
+    "description": "Seal portals, stop cultists, and prevent the awakening of the Old Ones in this Lovecraftian Pandemic.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 40, "play_time_max": 40,
+    "bgg_rating": 7.27, "weight": 2.46,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Mechs vs. Minions",
+    "description": "League of Legends characters pilot mechs in a cooperative campaign of increasingly epic proportions.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 7.68, "weight": 2.21,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "The Crew: The Quest for Planet Nine",
+    "description": "A cooperative trick-taking card game where players must complete 50 increasingly difficult missions.",
+    "min_players": 2, "max_players": 5, "min_age": 10,
+    "play_time_min": 20, "play_time_max": 20,
+    "bgg_rating": 7.80, "weight": 1.77,
+    "categories": ["Card Games", "Family Games"]
+  },
+  {
+    "name": "Clank!",
+    "description": "Sneak into a dungeon, grab as much loot as you can, and escape before the dragon gets you.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 45, "play_time_max": 90,
+    "bgg_rating": 7.71, "weight": 2.29,
+    "categories": ["Strategy Games", "Card Games"]
+  },
+  {
+    "name": "Paleo",
+    "description": "Cooperatively help a group of early humans survive the Stone Age by mastering different skill sets.",
+    "min_players": 2, "max_players": 4, "min_age": 10,
+    "play_time_min": 45, "play_time_max": 60,
+    "bgg_rating": 7.79, "weight": 2.15,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Wayfarers of the South Tigris",
+    "description": "Embark on a journey of exploration and cartography during the Golden Age of Islam.",
+    "min_players": 1, "max_players": 4, "min_age": 12,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 7.74, "weight": 2.94,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Pandemic: Fall of Rome",
+    "description": "Prevent the fall of the Roman Empire by fighting off barbarian tribes threatening its borders.",
+    "min_players": 1, "max_players": 5, "min_age": 10,
+    "play_time_min": 45, "play_time_max": 60,
+    "bgg_rating": 7.48, "weight": 2.47,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Endeavor: Age of Sail",
+    "description": "Build trade routes, occupy cities, and accumulate industry, culture, and wealth across the globe.",
+    "min_players": 2, "max_players": 5, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 7.50, "weight": 2.90,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Agricola: All Creatures Big and Small",
+    "description": "A two-player version of Agricola focused entirely on animal husbandry and farm development.",
+    "min_players": 2, "max_players": 2, "min_age": 13,
+    "play_time_min": 30, "play_time_max": 45,
+    "bgg_rating": 7.37, "weight": 2.08,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Tigris & Euphrates",
+    "description": "Reiner Knizia's classic abstract strategy game of civilization building in ancient Mesopotamia.",
+    "min_players": 2, "max_players": 4, "min_age": 12,
+    "play_time_min": 90, "play_time_max": 90,
+    "bgg_rating": 7.66, "weight": 3.44,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Acquire",
+    "description": "Merge hotel chains and invest wisely to build the most valuable portfolio in this classic board game.",
+    "min_players": 3, "max_players": 6, "min_age": 12,
+    "play_time_min": 90, "play_time_max": 90,
+    "bgg_rating": 7.28, "weight": 2.38,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Samurai",
+    "description": "Place tiles to surround castles, Buddhas, and rice paddies to win the favour of feudal Japan.",
+    "min_players": 2, "max_players": 4, "min_age": 10,
+    "play_time_min": 45, "play_time_max": 45,
+    "bgg_rating": 7.36, "weight": 2.30,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "War of the Ring (Second Edition)",
+    "description": "One player controls the Fellowship of the Ring, the other commands the forces of Sauron.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 150, "play_time_max": 180,
+    "bgg_rating": 8.36, "weight": 4.05,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Quantum",
+    "description": "Colonize the universe by deploying fleets and using quantum entanglement to your advantage.",
+    "min_players": 2, "max_players": 4, "min_age": 13,
+    "play_time_min": 45, "play_time_max": 60,
+    "bgg_rating": 7.22, "weight": 2.55,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Sid Meier's Civilization: A New Dawn",
+    "description": "Lead one of history's greatest civilizations from antiquity to the information age.",
+    "min_players": 2, "max_players": 4, "min_age": 14,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.18, "weight": 2.75,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Letters from Whitechapel",
+    "description": "One player is Jack the Ripper trying to evade capture while others play as investigators hunting him down.",
+    "min_players": 2, "max_players": 6, "min_age": 13,
+    "play_time_min": 60, "play_time_max": 90,
+    "bgg_rating": 7.28, "weight": 2.73,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Suburbia: Collector's Edition",
+    "description": "An expanded edition of Suburbia with additional tiles, challenge cards, and borders for your borough.",
+    "min_players": 1, "max_players": 4, "min_age": 8,
+    "play_time_min": 60, "play_time_max": 120,
+    "bgg_rating": 7.67, "weight": 2.74,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Arkham Horror (3rd Edition)",
+    "description": "Investigators explore a city of eldritch horror seeking clues to stop an Ancient One from awakening.",
+    "min_players": 1, "max_players": 6, "min_age": 14,
+    "play_time_min": 120, "play_time_max": 180,
+    "bgg_rating": 7.37, "weight": 3.30,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "The Voyages of Marco Polo",
+    "description": "Travel the Silk Road from Venice to the court of Kublai Khan, trading and gaining wealth.",
+    "min_players": 2, "max_players": 4, "min_age": 12,
+    "play_time_min": 40, "play_time_max": 100,
+    "bgg_rating": 7.96, "weight": 3.07,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Diplomacy",
+    "description": "The classic game of negotiation and betrayal set in pre-World War I Europe. No dice, just cunning.",
+    "min_players": 2, "max_players": 7, "min_age": 12,
+    "play_time_min": 360, "play_time_max": 360,
+    "bgg_rating": 6.86, "weight": 3.54,
+    "categories": ["Strategy Games"]
+  },
+  {
+    "name": "Race for the Galaxy",
+    "description": "Build a galactic civilization by exploring star systems, developing technologies, and settling worlds.",
+    "min_players": 2, "max_players": 4, "min_age": 12,
+    "play_time_min": 30, "play_time_max": 60,
+    "bgg_rating": 7.82, "weight": 2.93,
+    "categories": ["Card Games", "Strategy Games"]
+  },
+  {
+    "name": "Camel Up (Second Edition)",
+    "description": "Bet on camel races around a pyramid in this updated edition with new mechanics and components.",
+    "min_players": 3, "max_players": 8, "min_age": 8,
+    "play_time_min": 20, "play_time_max": 30,
+    "bgg_rating": 7.12, "weight": 1.50,
+    "categories": ["Family Games", "Party Games"]
+  },
+  {
+    "name": "Pandemic: Iberia",
+    "description": "Fight five diseases in 19th-century Iberian Peninsula, limited by historical technology of the era.",
+    "min_players": 2, "max_players": 5, "min_age": 8,
+    "play_time_min": 45, "play_time_max": 75,
+    "bgg_rating": 7.43, "weight": 2.52,
+    "categories": ["Strategy Games", "Family Games"]
+  },
+  {
+    "name": "Coup",
+    "description": "In a dystopian future, bluff and scheme to be the last player with influence in the government.",
+    "min_players": 2, "max_players": 6, "min_age": 10,
+    "play_time_min": 15, "play_time_max": 15,
+    "bgg_rating": 7.72, "weight": 1.49,
+    "categories": ["Party Games", "Card Games"]
+  }
+]
