@@ -23,9 +23,21 @@ class OrderController extends Controller
             'payment_method'  => 'required|string|max:50',
         ]);
 
-        $cart = Cart::with('items.product.discount')->where('user_id', Auth::id())->first();
+        // Support both authenticated and guest users
+        if (Auth::check()) {
+            $cart = Cart::with('items.product.discount')
+                ->where('user_id', Auth::id())
+                ->first();
+        } else {
+            $cart = Cart::with('items.product.discount')
+                ->where('session_id', session()->getId())
+                ->first();
+        }
 
         if (!$cart || $cart->items->isEmpty()) {
+            if ($request->wantsJson()) {
+                return response()->json(['success' => false, 'message' => 'Your cart is empty.'], 422);
+            }
             return redirect()->back()->with('error', 'Your cart is empty.');
         }
 
@@ -34,7 +46,7 @@ class OrderController extends Controller
         );
 
         $order = Order::create([
-            'user_id'         => Auth::id(),
+            'user_id'         => Auth::id(), // null for guests – make sure the column is nullable
             'first_name'      => $request->first_name,
             'last_name'       => $request->last_name,
             'email'           => $request->email,
