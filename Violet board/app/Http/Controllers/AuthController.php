@@ -33,13 +33,17 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        // Auth::attempt() regenerates the session ID, so we must save it
+        // beforehand – the guest cart in the DB is keyed by this old ID.
+        $sessionIdBeforeLogin = session()->getId();
+
         if (!Auth::attempt($credentials)) {
             return back()->withErrors([
                 'email' => 'Incorrect email or password.',
             ]);
         }
 
-        $this->mergeGuestCartIntoUserCart();
+        $this->mergeGuestCartIntoUserCart($sessionIdBeforeLogin);
         $this->mergeGuestFavoritesIntoUser();
 
         return redirect('/')->with('success', 'Welcome back!');
@@ -82,9 +86,8 @@ class AuthController extends Controller
         session()->forget('guest_favorites');
     }
 
-    private function mergeGuestCartIntoUserCart(): void
+    private function mergeGuestCartIntoUserCart(string $sessionId): void
     {
-        $sessionId = session()->getId();
         $guestCart = Cart::with('items')->where('session_id', $sessionId)->first();
         $userCart  = Cart::firstOrCreate(['user_id' => auth()->id()]);
 

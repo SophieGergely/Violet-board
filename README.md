@@ -1,8 +1,15 @@
-# Made by: Zsófia Gergely and Flóra Emma Kaňuchová
+Hello, this is an ongoing project! Both the frontend and backend are still a work in progress.
 
 ---
 
-Violet Board is an online board game webshop built with Laravel 12, PostgreSQL and Docker.
+Violet Board is a simulated online webshop for board games, built with Laravel 12, PostgreSQL and Docker.
+
+---
+
+The project is being worked on by:
+- [Zsófia Gergely](https://github.com/VitaWeyden) - Full-Stack Development
+- [Flóra Emma Kaňuchová](https://github.com/knchflora) - Former Contributor in Full-Stack Development
+- [Bálint Janik](https://github.com/balintj4) - UX/UI Testing
 
 ---
 
@@ -27,17 +34,7 @@ cd Violet-board
 
 ### 2. Set up the environment file
 
-Create a new file called `.env` in the root of the project and copy the entire contents of `.env.example` into it.
-
-**On Windows:**
-```bash
-copy .env.example .env
-```
-
-**On Mac/Linux:**
-```bash
-cat .env.example > .env
-```
+Create a new file called `.env` in the root of the project (the inner `Violet-board` folder) and copy the entire contents of `.env.example` into it.
 
 > The default values in `.env.example` work out of the box with Docker, you don't need to change anything to run the project locally.
 
@@ -45,7 +42,7 @@ cat .env.example > .env
 
 > ⚠️ **Make sure Docker Desktop is open before running this script.** The script will not work if Docker Desktop is closed.
 
-Make sure you are inside the `Violet-board` folder (where `start.py` is located), then run:
+Make sure you are inside the inner `Violet-board` folder (where `start.py` is located), then run the `start.py` python script:
 
 **On Windows:**
 ```bash
@@ -64,34 +61,6 @@ This will automatically:
 - Open the app in your browser at [http://localhost:8000](http://localhost:8000)
 
 > ⏳ **The first run will take a few minutes**, Docker needs to download and build all the images. Subsequent starts will be much faster.
-
----
-
-## Daily use
-
-Once the project has been set up with `start.py`, you can use these scripts for everyday use:
-
-**Start the app** (after Docker is already built):
-
-Windows:
-```bash
-python serve.py
-```
-Mac/Linux:
-```bash
-python3 serve.py
-```
-
-**Stop the app and remove all data** (full reset):
-
-Windows:
-```bash
-python stop.py
-```
-Mac/Linux:
-```bash
-python3 stop.py
-```
 
 ---
 

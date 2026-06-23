@@ -95,7 +95,7 @@
             // Favorite product IDs for this user
             $favoriteIds = auth()->check()
                 ? auth()->user()->favorites()->pluck('products.id')->toArray()
-                : [];
+                : session()->get('guest_favorites', []);
         @endphp
 
         @include('partials.breadcrumb', ['items' => $breadcrumbItems, 'extraClass' => 'page-breadcrumb--clear-toggle'])

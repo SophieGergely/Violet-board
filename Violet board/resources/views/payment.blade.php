@@ -72,8 +72,8 @@
                 <input type="hidden" name="last_name"  value="{{ request('last_name',  auth()->user()?->last_name  ?? '') }}">
                 <input type="hidden" name="email"      value="{{ request('email',      auth()->user()?->email      ?? '') }}">
                 <input type="hidden" name="phone"      value="{{ request('phone', '') }}">
-                <input type="hidden" name="street"     value="{{ request('box_location', request('street', 'N/A')) }}">
-                <input type="hidden" name="city"       value="{{ request('city',  'N/A') }}">
+                <input type="hidden" name="street"     value="{{ request('box_street', request('street', 'N/A')) }}">
+                <input type="hidden" name="city"       value="{{ request('box_city',   request('city',   'N/A')) }}">
                 <input type="hidden" name="state"      value="{{ request('state', request('country', 'Slovakia')) }}">
                 <input type="hidden" name="delivery_method" value="{{ request('box_location') ? 'box_collect' : 'courier' }}">
                 <input type="hidden" name="payment_method" id="payment_method_input" value="card">
@@ -115,7 +115,27 @@
 
     @include('partials.footer')
 
-    <script src="{{ asset('js/payment.js') }}"></script>
+    <script src="{{ asset('js/platba.js') }}"></script>
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = this;
+            fetch(form.action, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+                body: new FormData(form),
+            })
+            .then(r => r.json())
+            .then(json => {
+                if (json.success) {
+                    const modal = document.getElementById('thankYouModal');
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            })
+            .catch(() => form.submit());
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

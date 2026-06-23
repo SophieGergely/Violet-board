@@ -33,7 +33,7 @@
                     Shopping Cart
                 </h2>
                 <p class="text-center mb-4" style="color:var(--color-text-muted); border-bottom:2px solid var(--color-primary); padding-bottom:12px;">
-                    Items in cart: <span class="cart-grand-count">{{ $totalItems }}</span>
+                    Total items in cart: <span class="cart-grand-count">{{ $totalItems }}</span>
                 </p>
 
                 @forelse ($cartItems as $cartItem)

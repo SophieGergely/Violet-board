@@ -15,7 +15,7 @@
     $originalPrice  = (float) $product->price;
     $isFavorite     = auth()->check()
         ? auth()->user()->favorites()->where('product_id', $product->id)->exists()
-        : false;
+        : in_array($product->id, session()->get('guest_favorites', []));
     $labelName      = $product->label?->name;
     $imageUrls      = $product->images->pluck('url')->toJson();
     $firstImage     = $product->images->first()?->url ?? '';

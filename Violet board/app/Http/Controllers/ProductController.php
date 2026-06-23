@@ -121,8 +121,14 @@ class ProductController extends Controller
         $cart->items()->where('product_id', $id)->delete();
 
         if (request()->wantsJson()) {
+            $cartItems = $cart->items()->with('product.discount')->get();
+            $cartTotal = $cartItems->sum(fn($i) => $i->product->effectivePrice() * $i->quantity);
+
             return response()->json([
-                'cart_count' => $cart->items()->sum('quantity'),
+                'removed'           => true,
+                'cart_count'        => $cartItems->sum('quantity'),
+                'cart_total'        => number_format($cartTotal, 2),
+                'cart_preview_html' => view('partials.cart-preview')->render(),
             ]);
         }
 

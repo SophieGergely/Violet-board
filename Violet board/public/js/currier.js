@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('#shipping-form');
-    const inputs = form.querySelectorAll('input, select');
+    const form       = document.querySelector('#shipping-form');
+    const inputs     = form.querySelectorAll('input, select');
     const nextButton = document.getElementById('next-button');
 
     nextButton.disabled = true;
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         inputs.forEach(input => {
             const pattern = input.getAttribute('pattern');
-            const value = input.value.trim();
+            const value   = input.value.trim();
 
             if (input.required && value === '') {
                 isValid = false;
@@ -38,5 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('change', () => {
             validateForm();
         });
+    });
+
+    // Run on load so pre-filled (logged-in) values enable the button immediately
+    validateForm();
+
+    // Navigate to checkout, passing all delivery fields as query params
+    nextButton.addEventListener('click', () => {
+        if (!validateForm()) return;
+
+        const params = new URLSearchParams({
+            first_name: (form.querySelector('[name="first_name"]')?.value ?? '').trim(),
+            last_name:  (form.querySelector('[name="last_name"]')?.value ?? '').trim(),
+            email:      (form.querySelector('[name="email"]')?.value ?? '').trim(),
+            phone:      (form.querySelector('[name="phone"]')?.value ?? '').trim(),
+            street:     (document.getElementById('street')?.value ?? '').trim(),
+            city:       (document.getElementById('city')?.value ?? '').trim(),
+            state:      (document.getElementById('state')?.value ?? '').trim(),
+        });
+
+        window.location.href = '/checkout?' + params.toString();
     });
 });

@@ -50,24 +50,27 @@
             <h5 class="fw-semibold mb-4" style="color:var(--color-primary-dark);">Delivery Details</h5>
 
             @if($mode === 'box')
-                <form id="shipping-form" method="GET" action="{{ route('checkout') }}" class="row g-3">
+                <form id="shipping-form" method="GET" action="{{ route('checkout') }}" class="row g-3" novalidate>
             @else
-                <form id="shipping-form" class="row g-3">
+                <form id="shipping-form" class="row g-3" novalidate>
             @endif
 
                 <div class="col-md-6">
                     <label class="form-label fw-medium">First Name</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="John" required>
+                    <input type="text" class="form-control" name="first_name" placeholder="John"
+                        value="{{ auth()->user()?->first_name ?? '' }}" required>
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label fw-medium">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Doe" required>
+                    <input type="text" class="form-control" name="last_name" placeholder="Doe"
+                        value="{{ auth()->user()?->last_name ?? '' }}" required>
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label fw-medium">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="your@email.com" required>
+                    <input type="email" class="form-control" name="email" placeholder="your@email.com"
+                        value="{{ auth()->user()?->email ?? '' }}" required>
                 </div>
 
                 <div class="col-md-6">
@@ -88,11 +91,15 @@
                         <select name="box_location" class="form-select" required>
                             <option value="" disabled selected>Choose a location</option>
                             @foreach($locations as $location)
-                                <option value="{{ $location['name'] }}">
+                                <option value="{{ $location['name'] }}"
+                                        data-street="{{ $location['street'] }}"
+                                        data-city="{{ $location['city'] }}">
                                     {{ $location['name'] }} – {{ $location['street'] }}, {{ $location['city'] }}
                                 </option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="box_street" id="box-street" value="">
+                        <input type="hidden" name="box_city"   id="box-city"   value="">
                     </div>
                 @else
                     <div class="col-md-6">
@@ -115,7 +122,7 @@
 
                 <div class="col-12 text-center mt-4">
                     @if($mode === 'box')
-                        <button type="submit" class="btn btn-primary px-5">Continue to Payment</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary px-5">Continue to Payment</button>
                     @else
                         <button type="button" id="next-button" class="btn btn-primary px-5">Continue to Payment</button>
                     @endif
@@ -129,7 +136,7 @@
     @if($mode === 'box')
         <script src="{{ asset('js/boxcollect.js') }}"></script>
     @else
-        <script src="{{ asset('js/currier.js') }}"></script>
+        <script src="{{ asset('js/kurierska.js') }}"></script>
     @endif
 </body>
 </html>
