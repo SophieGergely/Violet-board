@@ -41,8 +41,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./Violet-board
-          dockerfile: ./Violet-board/Dockerfile
+          context: "./Violet board"
+          file: "./Violet board/Dockerfile"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha,scope=app
@@ -83,8 +83,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./Violet-board
-          dockerfile: ./Violet-board/Dockerfile.nginx
+          context: "./Violet board"
+          file: "./Violet board/Dockerfile.nginx"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha,scope=web
